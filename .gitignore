@@ -1,0 +1,5 @@
+/vendor/
+/Documentation.tmpl
+/Tests
+/Configuration/ExtensionBuilder
+/ExtensionBuilder.json
