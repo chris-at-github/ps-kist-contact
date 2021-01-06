@@ -9,6 +9,9 @@
 			<trans-unit id="tx_contact_domain_model_contact.record_type" resname="tx_contact_domain_model_contact.record_type">
 				<source>Contact</source>
 			</trans-unit>
+			<trans-unit id="tx_contact_domain_model_contact.locations" resname="tx_contact_domain_model_contact.locations">
+				<source>Locations</source>
+			</trans-unit>
 			<trans-unit id="tx_contact_domain_model_location" resname="tx_contact_domain_model_location">
 				<source>Location</source>
 			</trans-unit>
