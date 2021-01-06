@@ -6,8 +6,8 @@
 			<trans-unit id="tx_contact_domain_model_contact" resname="tx_contact_domain_model_contact">
 				<source>Contact</source>
 			</trans-unit>
-			<trans-unit id="tt_address.tx_extbase_type.Tx_Contact_Contact" resname="tt_address.tx_extbase_type.Tx_Contact_Contact">
-				<source>Contact Contact</source>
+			<trans-unit id="tx_contact_domain_model_contact.record_type" resname="tx_contact_domain_model_contact.record_type">
+				<source>Contact</source>
 			</trans-unit>
 			<trans-unit id="tx_contact_domain_model_location" resname="tx_contact_domain_model_location">
 				<source>Location</source>

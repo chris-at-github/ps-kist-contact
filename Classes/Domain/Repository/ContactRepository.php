@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Ps\Contact\Domain\Repository;
 
 
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+
 /***
  *
  * This file is part of the "Contact" Extension for TYPO3 CMS.
@@ -14,14 +16,9 @@ namespace Ps\Contact\Domain\Repository;
  *  (c) 2021 Christian Pschorr <pschorr.christian@gmail.com>
  *
  ***/
+
 /**
  * The repository for Contacts
  */
-class ContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
-{
-
-    /**
-     * @var array
-     */
-    protected $defaultOrderings = ['sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING];
+class ContactRepository extends \Ps\Xo\Domain\Repository\AddressRepository {
 }
