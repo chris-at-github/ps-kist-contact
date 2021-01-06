@@ -21,4 +21,23 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
  * The repository for Contacts
  */
 class ContactRepository extends \Ps\Xo\Domain\Repository\AddressRepository {
+
+	/**
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param array $options
+	 * @return array
+	 */
+	protected function getMatches($query, $options) {
+		$matches = parent::getMatches($query, $options);
+
+		if(isset($options['location']['zip']) === true) {
+			$matches[] = $query->equals('locations.zip', $options['location']['zip']);
+		}
+
+		if(isset($options['location']['country']) === true) {
+			$matches[] = $query->equals('locations.country', $options['location']['country']);
+		}
+
+		return $matches;
+	}
 }

@@ -14,46 +14,43 @@ namespace Ps\Contact\Controller;
  *  (c) 2021 Christian Pschorr <pschorr.christian@gmail.com>
  *
  ***/
+
 /**
  * ContactController
  */
-class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
-{
+class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
-    /**
-     * contactRepository
-     * 
-     * @var \Ps\Contact\Domain\Repository\ContactRepository
-     */
-    protected $contactRepository = null;
+	/**
+	 * contactRepository
+	 *
+	 * @var \Ps\Contact\Domain\Repository\ContactRepository
+	 */
+	protected $contactRepository = null;
 
-    /**
-     * @param \Ps\Contact\Domain\Repository\ContactRepository $contactRepository
-     */
-    public function injectContactRepository(\Ps\Contact\Domain\Repository\ContactRepository $contactRepository)
-    {
-        $this->contactRepository = $contactRepository;
-    }
+	/**
+	 * @param \Ps\Contact\Domain\Repository\ContactRepository $contactRepository
+	 */
+	public function injectContactRepository(\Ps\Contact\Domain\Repository\ContactRepository $contactRepository) {
+		$this->contactRepository = $contactRepository;
+	}
 
-    /**
-     * action list
-     * 
-     * @return void
-     */
-    public function listAction()
-    {
-        $contacts = $this->contactRepository->findAll();
-        $this->view->assign('contacts', $contacts);
-    }
+	/**
+	 * action list
+	 *
+	 * @return void
+	 */
+	public function listAction() {
+		$contacts = $this->contactRepository->findAll(['location' => ['zip' => '79215', 'country' => 13]]);
+		$this->view->assign('contacts', $contacts);
+	}
 
-    /**
-     * action show
-     * 
-     * @param \Ps\Contact\Domain\Model\Contact $contact
-     * @return void
-     */
-    public function showAction(\Ps\Contact\Domain\Model\Contact $contact)
-    {
-        $this->view->assign('contact', $contact);
-    }
+	/**
+	 * action show
+	 *
+	 * @param \Ps\Contact\Domain\Model\Contact $contact
+	 * @return void
+	 */
+	public function showAction(\Ps\Contact\Domain\Model\Contact $contact) {
+		$this->view->assign('contact', $contact);
+	}
 }
