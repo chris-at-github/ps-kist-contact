@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Ps\Contact\Controller;
 
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /***
  *
@@ -26,6 +27,14 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @var \Ps\Contact\Domain\Repository\ContactRepository
 	 */
 	protected $contactRepository = null;
+
+	/**
+	 * contactRepository
+	 *
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @var \Ps\Contact\Domain\Repository\CountryRepository
+	 */
+	protected $countryRepository = null;
 
 	/**
 	 * @param \Ps\Contact\Domain\Repository\ContactRepository $contactRepository
@@ -52,5 +61,12 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function showAction(\Ps\Contact\Domain\Model\Contact $contact) {
 		$this->view->assign('contact', $contact);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function formAction() {
+		$this->view->assign('countries', $this->countryRepository->findAll(['parent' => 12]));
 	}
 }

@@ -1,0 +1,2 @@
+# cat=Category; type=int+; label=Parent category (UID) for countries
+parentCountryCategory =
