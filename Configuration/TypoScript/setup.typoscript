@@ -5,6 +5,7 @@ plugin.tx_contact {
 
 		partialRootPaths.0 = EXT:contact/Resources/Private/Partials/
 		partialRootPaths.1 = {$plugin.tx_contact.view.partialRootPath}
+		partialRootPaths.2 = EXT:xo/Resources/Private/Extensions/Xo/Partials/
 
 		layoutRootPaths.0 = EXT:contact/Resources/Private/Layouts/
 		layoutRootPaths.1 = {$plugin.tx_contact.view.layoutRootPath}

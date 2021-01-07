@@ -1,0 +1,27 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="Main">
+
+	<f:if condition="{contacts}">
+		<div class="row">
+			<f:for each="{contacts}" as="contact">
+				<div class="col-12 col-md-6">
+					<f:render section="Item" arguments="{contact: contact}" />
+				</div>
+			</f:for>
+		</div>
+	</f:if>
+
+</f:section>
+
+<f:section name="Item">
+	<div class="address contact-item">
+		<div class="address--name">
+			<f:render partial="Components/Person" section="Fullname" arguments="{person: contact}" />
+		</div>
+
+		<f:render partial="Components/Address" section="Phone" arguments="{address: contact}" />
+		<f:render partial="Components/Address" section="Mail" arguments="{address: contact}" />
+	</div>
+</f:section>
+</html>

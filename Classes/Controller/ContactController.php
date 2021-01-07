@@ -22,26 +22,16 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
-	 * contactRepository
-	 *
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 * @var \Ps\Contact\Domain\Repository\ContactRepository
 	 */
 	protected $contactRepository = null;
 
 	/**
-	 * contactRepository
-	 *
 	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 * @var \Ps\Contact\Domain\Repository\CountryRepository
 	 */
 	protected $countryRepository = null;
-
-	/**
-	 * @param \Ps\Contact\Domain\Repository\ContactRepository $contactRepository
-	 */
-	public function injectContactRepository(\Ps\Contact\Domain\Repository\ContactRepository $contactRepository) {
-		$this->contactRepository = $contactRepository;
-	}
 
 	/**
 	 * action list
@@ -49,8 +39,7 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function listAction() {
-		$contacts = $this->contactRepository->findAll(['location' => ['zip' => '79215', 'country' => 13]]);
-		$this->view->assign('contacts', $contacts);
+		$this->view->assign('contacts', $this->contactRepository->findAll());
 	}
 
 	/**
@@ -68,5 +57,24 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function formAction() {
 		$this->view->assign('countries', $this->countryRepository->findAll(['parent' => 12]));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function searchAction() {
+		$options = [
+			'location' => []
+		];
+
+		if($this->request->hasArgument('country') === true) {
+			$options['location']['country'] = $this->request->getArgument('country');
+		}
+
+		if($this->request->hasArgument('zip') === true) {
+			$options['location']['zip'] = $this->request->getArgument('zip');
+		}
+
+		$this->view->assign('contacts', $this->contactRepository->findAll($options));
 	}
 }
