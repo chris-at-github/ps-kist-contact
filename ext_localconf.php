@@ -19,11 +19,11 @@ call_user_func(function() {
 		'Contact',
 		'Search',
 		[
-			\Ps\Contact\Controller\ContactController::class => 'form, search'
+			\Ps\Contact\Controller\ContactController::class => 'form, search, vcard'
 		],
 		// non-cacheable actions
 		[
-			\Ps\Contact\Controller\ContactController::class => 'search'
+			\Ps\Contact\Controller\ContactController::class => 'search, vcard'
 		]
 	);
 

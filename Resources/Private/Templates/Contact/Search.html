@@ -22,6 +22,10 @@
 
 		<f:render partial="Components/Address" section="Phone" arguments="{address: contact}" />
 		<f:render partial="Components/Address" section="Mail" arguments="{address: contact}" />
+
+		<div>
+			<f:link.action action="vcard" arguments="{contact: contact}">vCard</f:link.action>
+		</div>
 	</div>
 </f:section>
 </html>

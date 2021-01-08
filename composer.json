@@ -1,28 +1,32 @@
 {
-    "name": "ps/contact",
-    "type": "typo3-cms-extension",
-    "description": "",
-    "authors": [
-        {
-            "name": "Christian Pschorr",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "typo3/cms-core": "^10.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Ps\\Contact\\": "Classes"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Ps\\Contact\\Tests\\": "Tests"
-        }
-    },
-    "replace": {
-        "ps/contact": "self.version",
-        "typo3-ter/contact": "self.version"
-    }
+	"name": "ps/contact",
+	"type": "typo3-cms-extension",
+	"description": "",
+	"authors": [
+		{
+			"name": "Christian Pschorr",
+			"role": "Developer"
+		}
+	],
+	"config": {
+		"vendor-dir": "Vendor"
+	},
+	"require": {
+		"jeroendesloovere/vcard": "dev-2.0.0-dev"
+	},
+	"autoload": {
+		"psr-4": {
+			"Ps\\Contact\\": "Classes",
+			"JeroenDesloovere\\VCard\\": "Vendor/jeroendesloovere/vcard"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Ps\\Contact\\Tests\\": "Tests"
+		}
+	},
+	"replace": {
+		"ps/contact": "self.version",
+		"typo3-ter/contact": "self.version"
+	}
 }

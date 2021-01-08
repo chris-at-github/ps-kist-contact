@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Ps\Contact\Controller;
 
+use JeroenDesloovere\VCard\VCard;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /***
@@ -76,5 +77,15 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 
 		$this->view->assign('contacts', $this->contactRepository->findAll($options));
+	}
+
+	/**
+	 * @param \Ps\Contact\Domain\Model\Contact $contact
+	 */
+	public function vcardAction(\Ps\Contact\Domain\Model\Contact $contact) {
+		DebuggerUtility::var_dump($contact);
+
+		$vcard = new VCard();
+		DebuggerUtility::var_dump($vcard);
 	}
 }
