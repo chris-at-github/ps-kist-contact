@@ -1,5 +1,6 @@
-/vendor/
+/Vendor/
 /Documentation.tmpl
 /Tests
 /Configuration/ExtensionBuilder
 /ExtensionBuilder.json
+composer.lock
