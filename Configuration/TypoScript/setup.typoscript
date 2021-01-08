@@ -27,4 +27,35 @@ plugin.tx_contact {
 	mvc {
 		#callDefaultActionIfActionCantBeResolved = 1
 	}
+
+	settings {
+		vcardPageType = {$plugin.tx_contact.settings.vcardPageType}
+	}
+}
+
+vcard = PAGE
+vcard {
+	typeNum = 1610142287
+
+	config {
+		disableAllHeaderCode = 1
+		xhtml_cleaning = 0
+		debug = 0
+		no_cache = 1
+		admPanel = 0
+	}
+
+	10 = USER
+	10 {
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		extensionName = Contact
+		pluginName = Search
+		vendorName = Ps
+
+		switchableControllerActions {
+			Contact {
+				1 = vcard
+			}
+		}
+	}
 }

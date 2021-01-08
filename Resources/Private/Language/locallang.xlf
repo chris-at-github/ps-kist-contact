@@ -3,26 +3,8 @@
 	<file source-language="en" datatype="plaintext" original="EXT:contact/Resources/Private/Language/locallang" date="2021-01-06T17:01:06Z" product-name="contact">
 		<header/>
 		<body>
-			<trans-unit id="tx_contact_domain_model_contact" resname="tx_contact_domain_model_contact">
-				<source>Contact</source>
-			</trans-unit>
-			<trans-unit id="tx_contact_domain_model_location" resname="tx_contact_domain_model_location">
-				<source>Location</source>
-			</trans-unit>
-			<trans-unit id="tx_contact_domain_model_location.zip" resname="tx_contact_domain_model_location.zip">
-				<source>Zip</source>
-			</trans-unit>
-			<trans-unit id="tx_contact_domain_model_location.contact" resname="tx_contact_domain_model_location.contact">
-				<source>Contact</source>
-			</trans-unit>
-			<trans-unit id="tx_contact_domain_model_location.country" resname="tx_contact_domain_model_location.country">
-				<source>Country</source>
-			</trans-unit>
-			<trans-unit id="tx_contact_domain_model_country" resname="tx_contact_domain_model_country">
-				<source>Country</source>
-			</trans-unit>
-			<trans-unit id="tx_contact_domain_model_country.tx_contact_zip_regex" resname="tx_contact_domain_model_country.tx_contact_zip_regex">
-				<source>Tx Contact Zip Regex</source>
+			<trans-unit id="actions.vcard" resname="actions.vcard">
+				<source>vCard download</source>
 			</trans-unit>
 		</body>
 	</file>

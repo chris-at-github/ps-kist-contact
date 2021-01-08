@@ -6,7 +6,7 @@
 		<div class="row">
 			<f:for each="{contacts}" as="contact">
 				<div class="col-12 col-md-6">
-					<f:render section="Item" arguments="{contact: contact}" />
+					<f:render section="Item" arguments="{_all}" />
 				</div>
 			</f:for>
 		</div>
@@ -23,8 +23,10 @@
 		<f:render partial="Components/Address" section="Phone" arguments="{address: contact}" />
 		<f:render partial="Components/Address" section="Mail" arguments="{address: contact}" />
 
-		<div>
-			<f:link.action action="vcard" arguments="{contact: contact}">vCard</f:link.action>
+		<div class="contact-item--vcard">
+			<f:link.action action="vcard" arguments="{contact: contact}" pageType="{settings.vcardPageType}">
+				<span class="badge badge--default">vcf</span><f:translate key="actions.vcard" />
+			</f:link.action>
 		</div>
 	</div>
 </f:section>

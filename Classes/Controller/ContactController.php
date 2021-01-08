@@ -3,8 +3,15 @@ declare(strict_types=1);
 
 namespace Ps\Contact\Controller;
 
+use JeroenDesloovere\VCard\Formatter\Formatter;
+use JeroenDesloovere\VCard\Formatter\VcfFormatter;
+use JeroenDesloovere\VCard\Property\Email;
+use JeroenDesloovere\VCard\Property\Gender;
+use JeroenDesloovere\VCard\Property\Name;
+use JeroenDesloovere\VCard\Property\Parameter\Type;
+use JeroenDesloovere\VCard\Property\Telephone;
 use JeroenDesloovere\VCard\VCard;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /***
  *
@@ -83,9 +90,53 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @param \Ps\Contact\Domain\Model\Contact $contact
 	 */
 	public function vcardAction(\Ps\Contact\Domain\Model\Contact $contact) {
-		DebuggerUtility::var_dump($contact);
-
 		$vcard = new VCard();
-		DebuggerUtility::var_dump($vcard);
+
+		// Name + Anrede (mappen)
+		$salutation = [
+			'm' => LocalizationUtility::translate('LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.salutation.m', 'Xo'),
+			'f' => LocalizationUtility::translate('LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.salutation.f', 'Xo'),
+			'v' => '',
+			'' => ''
+		];
+
+		$vcard->add(new Name($contact->getLastName(), $contact->getFirstName(), '', $salutation[$contact->getGender()]));
+
+		// Geschlecht (bzw. mappen)
+		$gender = [
+			'm' => 'M',
+			'f' => 'F',
+			'v' => 'O',
+			'' => 'U'
+		];
+		$vcard->add(new Gender($gender[$contact->getGender()]));
+
+		// E-Mail geschaeftlich
+		if(empty($contact->getEmail()) === false) {
+			$vcard->add(new Email($contact->getEmail(), Type::work()));
+		}
+
+		// Telefon geschaeftlich
+		if(empty($contact->getPhone()) === false) {
+			$vcard->add(new Telephone($contact->getPhone(), Type::work()));
+		}
+
+		// Mobil geschaeftlich
+		if(empty($contact->getMobile()) === false) {
+			$vcard->add(new Telephone($contact->getMobile(), Type::work()));
+		}
+
+		//$vcard->add(new Org('Kist + Escherich GmbH'));
+
+		// Dateiname
+		$filename = strtolower($contact->getLastName() . '-' . $contact->getFirstName());
+		$filename = str_replace(['ä', 'ö', 'ü', 'ß'], ['ae', 'oe', 'ue', 'ss'], $filename);
+		$filename = preg_replace('/[^0-9a-z\-]/m', '', $filename);
+
+		$formatter = new Formatter(new VcfFormatter(), $filename);
+		$formatter->addVCard($vcard);
+		$formatter->download();
+
+		return true;
 	}
 }

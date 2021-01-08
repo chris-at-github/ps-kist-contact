@@ -1,17 +1,22 @@
 plugin.tx_contact {
 	view {
-		# cat=plugin.tx_contact_frontend/file; type=string; label=Path to template root (FE)
+		# cat=plugin.tx_contact/file; type=string; label=Path to template root (FE)
 		templateRootPath = EXT:contact/Resources/Private/Templates/
 
-		# cat=plugin.tx_contact_frontend/file; type=string; label=Path to template partials (FE)
+		# cat=plugin.tx_contact/file; type=string; label=Path to template partials (FE)
 		partialRootPath = EXT:contact/Resources/Private/Partials/
 
-		# cat=plugin.tx_contact_frontend/file; type=string; label=Path to template layouts (FE)
+		# cat=plugin.tx_contact/file; type=string; label=Path to template layouts (FE)
 		layoutRootPath = EXT:contact/Resources/Private/Layouts/
 	}
 
 	persistence {
-		# cat=plugin.tx_contact_frontend//a; type=string; label=Default storage PID
+		# cat=plugin.tx_contact//a; type=string; label=Default storage PID
 		storagePid =
+	}
+
+	settings {
+		# cat=plugin.tx_contact//a; type=string; label=Page type of vcard action
+		vcardPageType = 1610142287
 	}
 }
