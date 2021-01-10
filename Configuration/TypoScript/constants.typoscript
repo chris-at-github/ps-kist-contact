@@ -18,5 +18,11 @@ plugin.tx_contact {
 	settings {
 		# cat=plugin.tx_contact//a; type=string; label=Page type of vcard action
 		vcardPageType = 1610142287
+
+		# cat=plugin.tx_contact//a; type=string; label=Page uid of ajax search
+		searchRequestPageUid =
+
+		# cat=plugin.tx_contact//a; type=string; label=Page type of ajax search
+		searchRequestPageType =
 	}
 }

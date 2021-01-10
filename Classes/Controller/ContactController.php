@@ -11,6 +11,7 @@ use JeroenDesloovere\VCard\Property\Name;
 use JeroenDesloovere\VCard\Property\Parameter\Type;
 use JeroenDesloovere\VCard\Property\Telephone;
 use JeroenDesloovere\VCard\VCard;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /***

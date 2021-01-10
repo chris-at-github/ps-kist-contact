@@ -30,6 +30,8 @@ plugin.tx_contact {
 
 	settings {
 		vcardPageType = {$plugin.tx_contact.settings.vcardPageType}
+		searchRequestPageUid = {$plugin.tx_contact.settings.searchRequestPageUid}
+		searchRequestPageType = {$plugin.tx_contact.settings.searchRequestPageType}
 	}
 }
 
