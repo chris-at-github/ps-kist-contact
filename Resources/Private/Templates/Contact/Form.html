@@ -9,16 +9,16 @@
 	<f:form action="search" class="row form--layout-0" pageUid="{settings.searchRequestPageUid}" pageType="{settings.searchRequestPageType}">
 		<div class="col-12 col-sm-6 form-item">
 			<label class="form-label" for="location-country"><f:translate key="LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.country" /></label>
-			<f:form.select name="country" class="form-field" id="location-country" options="{countries}" optionLabelField="title" prependOptionLabel="" prependOptionValue="0" />
+			<f:form.select name="country" class="form-field contact-search--countries" id="location-country" options="{countries}" optionLabelField="title" prependOptionLabel="" prependOptionValue="0" />
 		</div>
 
 		<div class="col-12 col-sm-6 form-item">
 			<label class="form-label" for="location-zip"><f:translate key="LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.zip" /></label>
-			<f:form.textfield name="zip" class="form-field" id="location-zip" />
+			<f:form.textfield name="zip" class="form-field contact-search--zip" id="location-zip" disabled="disabled" />
 		</div>
 
 		<div class="col-12 form-action">
-			<button type="submit" class="button"><f:translate key="LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.action.search" /></button>
+			<button type="submit" class="button" disabled="disabled"><f:translate key="LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.action.search" /></button>
 		</div>
 	</f:form>
 
