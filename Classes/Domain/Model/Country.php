@@ -14,37 +14,31 @@ namespace Ps\Contact\Domain\Model;
  *  (c) 2021 Christian Pschorr <pschorr.christian@gmail.com>
  *
  ***/
+
 /**
  * Country
  */
-class Country extends \Ps\Xo\Domain\Model\Category
-{
+class Country extends \Ps\Xo\Domain\Model\Category {
 
-    /**
-     * txContactZipRegex
-     * 
-     * @var string
-     */
-    protected $txContactZipRegex = '';
+	/**
+	 * zipRegex
+	 *
+	 * @var string
+	 */
+	protected $zipRegex = '';
 
-    /**
-     * Returns the txContactZipRegex
-     * 
-     * @return string $txContactZipRegex
-     */
-    public function getTxContactZipRegex()
-    {
-        return $this->txContactZipRegex;
-    }
+	/**
+	 * @return string $zipRegex
+	 */
+	public function getZipRegex() {
+		return $this->zipRegex;
+	}
 
-    /**
-     * Sets the txContactZipRegex
-     * 
-     * @param string $txContactZipRegex
-     * @return void
-     */
-    public function setTxContactZipRegex($txContactZipRegex)
-    {
-        $this->txContactZipRegex = $txContactZipRegex;
-    }
+	/**
+	 * @param string $zipRegex
+	 * @return void
+	 */
+	public function setZipRegex($zipRegex) {
+		$this->zipRegex = $zipRegex;
+	}
 }

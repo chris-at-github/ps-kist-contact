@@ -11,6 +11,8 @@ use JeroenDesloovere\VCard\Property\Name;
 use JeroenDesloovere\VCard\Property\Parameter\Type;
 use JeroenDesloovere\VCard\Property\Telephone;
 use JeroenDesloovere\VCard\VCard;
+use Ps\Contact\Domain\Repository\CountryRepository;
+use Ps\Xo\Service\JsonService;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -65,7 +67,14 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function formAction() {
-		$this->view->assign('countries', $this->countryRepository->findAll(['parent' => 12]));
+		$countries = $this->objectManager->get(CountryRepository::class)->findAll(['parent' => 12]);
+		$jsonService = $this->objectManager->get(JsonService::class);
+
+		//DebuggerUtility::var_dump($jsonService->toJson($countries, ['uid', 'title', 'zipRegex']));
+
+		$this->view->assign('countries', $this->objectManager->get(CountryRepository::class)->findAll(['parent' => 12]));
+
+
 	}
 
 	/**

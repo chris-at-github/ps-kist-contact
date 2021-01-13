@@ -12,5 +12,10 @@ return [
 	],
 	\Ps\Contact\Domain\Model\Country::class => [
 		'tableName' => 'sys_category',
+		'properties' => [
+			'zipRegex' => [
+				'fieldName' => 'tx_contact_zip_regex'
+			],
+		]
 	],
 ];
