@@ -6,6 +6,9 @@
 			<trans-unit id="actions.vcard" resname="actions.vcard">
 				<source>vCard download</source>
 			</trans-unit>
+			<trans-unit id="error.noResult" resname="error.noResult">
+				<source>No contacts found. Please enter a valid zip.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -3,13 +3,18 @@
 <f:section name="Main">
 
 	<f:if condition="{contacts}">
-		<div class="row">
-			<f:for each="{contacts}" as="contact">
-				<div class="col-12 col-md-6">
-					<f:render section="Item" arguments="{_all}" />
-				</div>
-			</f:for>
-		</div>
+		<f:then>
+			<div class="row">
+				<f:for each="{contacts}" as="contact">
+					<div class="col-12 col-md-6">
+						<f:render section="Item" arguments="{_all}" />
+					</div>
+				</f:for>
+			</div>
+		</f:then>
+		<f:else>
+			<div class="contact-search--result-error"><f:translate key="error.noResult" /></div>
+		</f:else>
 	</f:if>
 
 </f:section>
