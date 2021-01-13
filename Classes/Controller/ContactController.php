@@ -76,7 +76,8 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function formAction() {
-		$this->view->assign('countries', $this->countryRepository->findAll(['parent' => 12]));
+		$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contact');
+		$this->view->assign('countries', $this->countryRepository->findAll(['parent' => (int) $extensionConfiguration['parentCountryCategory']]));
 	}
 
 	/**

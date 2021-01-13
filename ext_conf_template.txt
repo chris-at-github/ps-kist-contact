@@ -1,2 +1,5 @@
 # cat=Category; type=int+; label=Parent category (UID) for countries
 parentCountryCategory =
+
+# cat=Category; type=int+; label=UID of contact folder
+uidContactFolder =
