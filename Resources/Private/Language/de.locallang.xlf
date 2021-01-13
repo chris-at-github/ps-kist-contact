@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:contact/Resources/Private/Language/locallang" date="2021-01-06T17:01:06Z" product-name="contact"  target-language="de">
+		<header/>
+		<body>
+			<trans-unit id="actions.vcard" resname="actions.vcard">
+				<target>vCard downloaden</target>
+			</trans-unit>
+			<trans-unit id="error.noResult" resname="error.noResult">
+				<target>Keine Kontakte gefunden. Bitte geben Sie eine korrekte Postleitzahl an.</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
