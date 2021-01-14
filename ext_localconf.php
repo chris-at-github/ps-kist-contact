@@ -29,32 +29,9 @@ call_user_func(function() {
 
 	// wizards
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-		'mod {
-			wizards.newContentElement.wizardItems.plugins {
-				elements {
-					frontend {
-						iconIdentifier = contact-plugin-frontend
-						title = LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_frontend.name
-						description = LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_frontend.description
-						tt_content_defValues {
-							CType = list
-							list_type = contact_frontend
-						}
-					}
-					search {
-						iconIdentifier = contact-plugin-frontend
-						title = LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_search.name
-						description = LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_search.description
-						tt_content_defValues {
-							CType = list
-							list_type = contact_search
-						}
-					}
-				}
-				show = *
-			}
-		}'
+		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:contact/Configuration/TSConfig/Page.t3s">'
 	);
+
 	$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
 
 	$iconRegistry->registerIcon(
