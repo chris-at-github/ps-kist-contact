@@ -210,7 +210,8 @@ class ImportCommand extends Command {
 				'first_name' => trim($data[$index['vorname']]),
 				'last_name' => trim($data[$index['nachname']]),
 				'phone' => trim($data[$index['telefon']]),
-				'email' => trim($data[$index['e-mail']])
+				'email' => trim($data[$index['e-mail']]),
+				'record_type' => \Ps\Contact\Domain\Model\Contact::class
 			])
 			->execute();
 
