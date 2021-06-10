@@ -1,14 +1,23 @@
 plugin.tx_contact {
 	view {
-		templateRootPaths.0 = EXT:contact/Resources/Private/Templates/
-		templateRootPaths.1 = {$plugin.tx_contact.view.templateRootPath}
+		layoutRootPaths {
+			10 = EXT:contact/Resources/Private/Layouts/
+			20 = EXT:xna/Resources/Private/Extensions/Contact/Layouts/
+			30 = {$plugin.tx_contact.view.layoutRootPath}
+		}
 
-		partialRootPaths.0 = EXT:contact/Resources/Private/Partials/
-		partialRootPaths.1 = {$plugin.tx_contact.view.partialRootPath}
-		partialRootPaths.2 = EXT:xo/Resources/Private/Extensions/Xo/Partials/
+		templateRootPaths {
+			10 = EXT:contact/Resources/Private/Templates/
+			20 = EXT:xna/Resources/Private/Extensions/Contact/Templates/
+			30 = {$plugin.tx_contact.view.templateRootPath}
+		}
 
-		layoutRootPaths.0 = EXT:contact/Resources/Private/Layouts/
-		layoutRootPaths.1 = {$plugin.tx_contact.view.layoutRootPath}
+		partialRootPaths {
+			10 = EXT:contact/Resources/Private/Partials/
+			20 = EXT:xo/Resources/Private/Extensions/Xo/Partials/
+			30 = EXT:xna/Resources/Private/Extensions/Contact/Partials/
+			40 = {$plugin.tx_contact.view.partialRootPath}
+		}
 	}
 
 	persistence {
@@ -58,6 +67,18 @@ vcard {
 			Contact {
 				1 = vcard
 			}
+		}
+	}
+}
+
+tt_content.list.dataProcessing.200 {
+	contact_search {
+		importCss {
+			10 = /assets/css/modules/contact.css
+		}
+
+		importJs {
+			10 = /assets/js/contact.js
 		}
 	}
 }

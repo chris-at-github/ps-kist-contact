@@ -1,0 +1,71 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../../../../xna/Resources/Public/Sass/functions';
+@import '../../../../xna/Resources/Public/Sass/variables';
+@import '../../../../xna/Resources/Public/Sass/mixins';
+@import '../../../../xna/Resources/Public/Sass/definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variablen
+$tx-contact--use-css: true !default;
+$tx-contact--layout-search: true !default;
+
+@if($tx-contact--use-css) {
+
+	// -------------------------------------------------------------------------------------------------------------------
+	// Component
+	.contact-item {
+		& {
+			margin: $spacing-default 0 0 0;
+			padding: rem(10px 15px);
+			background: #fff;
+		}
+
+		.address--name + .address--item {
+			margin: $spacing-default 0 0 0;
+		}
+
+		.contact-item--vcard {
+			& {
+				margin: rem(10px 0 0 0);
+			}
+
+			&:hover {
+				.badge {
+					background: #aaa;
+				}
+			}
+
+			.badge {
+				margin-right: rem(8px);
+				transition: background 0.25s;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------
+	// Suche
+	@if($tx-contact--layout-search) {
+		.contact-search--result {
+			& {
+				overflow: hidden;
+				max-height: 0;
+				opacity: 1;
+				transition-property: max-height, opacity;
+				transition-duration: 0.25s;
+			}
+
+			.contact-search--result-error {
+				padding: rem(20px 0 0 0);
+				font-weight: $font-weight-bold;
+				color: $theme-color-error;
+			}
+		}
+
+		.is-contact-loading {
+			.contact-search--result {
+				opacity: 0;
+			}
+		}
+	}
+}
