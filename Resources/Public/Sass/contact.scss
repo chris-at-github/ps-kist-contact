@@ -69,3 +69,7 @@ $tx-contact--layout-search: true !default;
 		}
 	}
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// XNA Override
+@import '../../../../xna/Resources/Public/Sass/xna/modules/contact';
