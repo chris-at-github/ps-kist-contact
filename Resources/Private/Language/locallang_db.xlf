@@ -39,6 +39,12 @@
 			<trans-unit id="tx_contact_frontend.description" resname="tx_contact_frontend.description">
 				<source></source>
 			</trans-unit>
+			<trans-unit id="tx_contact_search.name" resname="tx_contact_search.name">
+				<source>Contact Search</source>
+			</trans-unit>
+			<trans-unit id="tx_contact_search.description" resname="tx_contact_search.description">
+				<source></source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
