@@ -87,6 +87,10 @@
 					let regex = new RegExp(zipRegex, 'g');
 					let value = this.value + String.fromCharCode(event.charCode || event.keyCode);
 
+					if(window.getSelection().toString().length !== 0) {
+						value = value.replace(window.getSelection().toString(), '');
+					}
+
 					if(value.match(regex) === null) {
 						event.preventDefault();
 					}
