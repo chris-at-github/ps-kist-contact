@@ -13,8 +13,12 @@
 			// Fertiges HTML in den vorbereiteten Container laden
 			container.innerHTML = event.detail.responseBody;
 
+			let height = container.offsetHeight;
+				height += parseInt(window.getComputedStyle(container).marginTop);
+				height += parseInt(window.getComputedStyle(container).marginBottom);
+
 			// Eltern-DIV auf die Groesse aufspannen
-			container.parentElement.style.maxHeight = container.offsetHeight + 'px';
+			container.parentElement.style.maxHeight = height + 'px';
 		});
 
 		document.querySelectorAll('.ce-contact-search').forEach(function(node, index) {
