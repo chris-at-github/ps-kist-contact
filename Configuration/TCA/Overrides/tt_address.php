@@ -17,11 +17,6 @@ $GLOBALS['TCA']['tt_address']['palettes']['contactContact'] = [
 	'showitem' => 'phone, email,'
 ];
 
-$GLOBALS['TCA']['tt_address']['palettes']['contactHidden'] = [
-	'showitem' => 'record_type',
-	'isHiddenPalette' => 0
-];
-
 // ---------------------------------------------------------------------------------------------------------------------
 // Neue Spalten
 $tmpAddressColumns = [
@@ -46,6 +41,7 @@ $tmpAddressColumns = [
 // ---------------------------------------------------------------------------------------------------------------------
 // Neue Feldzuordnungen
 $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['showitem'] = '
+		record_type,
 		--palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.name;contactName,
 		--palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.contact;contactContact,
 	,--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
@@ -53,5 +49,4 @@ $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class][
 	--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
 		--palette--;;paletteHidden, 
 		--palette--;;paletteAccess,
-		--palette--;;contactHidden,
 ';
