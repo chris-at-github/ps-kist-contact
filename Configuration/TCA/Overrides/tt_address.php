@@ -4,7 +4,9 @@ defined('TYPO3_MODE') || die();
 // ---------------------------------------------------------------------------------------------------------------------
 // Neuer Extbase-Typ
 if(isset($GLOBALS['TCA']['tt_address']['columns']['record_type']) === true) {
-	$GLOBALS['TCA']['tt_address']['columns']['record_type']['config']['items'][] = ['LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_contact.record_type', \Ps\Contact\Domain\Model\Contact::class];
+	$GLOBALS['TCA']['tt_address']['columns']['record_type']['config']['items'][] = [
+		'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_contact.record_type', \Ps\Contact\Domain\Model\Contact::class
+	];
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -34,9 +36,25 @@ $tmpAddressColumns = [
 			],
 		],
 	],
+	'tx_contact_additional_description' => [
+		'exclude' => 1,
+		'label' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_contact.additional_description',
+		'config' => [
+			'type' => 'text',
+			'enableRichtext' => true,
+			'richtextConfiguration' => 'xoMinimal',
+			'fieldControl' => [
+				'fullScreenRichtext' => [
+					'disabled' => false,
+				],
+			],
+			'eval' => 'trim',
+		],
+	],
 ];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_address', $tmpAddressColumns);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_address', '--linebreak--, tx_contact_additional_description,', \Ps\Xo\Domain\Model\Address::class, 'after:description');
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Neue Feldzuordnungen
