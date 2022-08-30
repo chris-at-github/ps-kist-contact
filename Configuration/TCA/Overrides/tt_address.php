@@ -36,25 +36,9 @@ $tmpAddressColumns = [
 			],
 		],
 	],
-	'tx_contact_additional_description' => [
-		'exclude' => 1,
-		'label' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_contact.additional_description',
-		'config' => [
-			'type' => 'text',
-			'enableRichtext' => true,
-			'richtextConfiguration' => 'xoDefault',
-			'fieldControl' => [
-				'fullScreenRichtext' => [
-					'disabled' => false,
-				],
-			],
-			'eval' => 'trim',
-		],
-	],
 ];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_address', $tmpAddressColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_address', '--linebreak--, tx_contact_additional_description,', \Ps\Xo\Domain\Model\Address::class, 'after:description');
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Neue Feldzuordnungen

@@ -1,6 +1,5 @@
 CREATE TABLE tt_address (
-	tx_contact_locations int(11) unsigned DEFAULT '0',
-	tx_contact_additional_description text
+	tx_contact_locations int(11) unsigned DEFAULT '0'
 );
 
 CREATE TABLE tx_contact_domain_model_location (
