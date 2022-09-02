@@ -8,6 +8,15 @@ return [
 			'locations' => [
 				'fieldName' => 'tx_contact_locations'
 			],
+			'productLine' => [
+				'fieldName' => 'tx_contact_product_line'
+			],
+			'continent' => [
+				'fieldName' => 'tx_contact_continent'
+			],
+			'country' => [
+				'fieldName' => 'tx_contact_country'
+			],
 		]
 	],
 	\Ps\Contact\Domain\Model\Country::class => [

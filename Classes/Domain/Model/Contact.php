@@ -21,12 +21,26 @@ namespace Ps\Contact\Domain\Model;
 class Contact extends \Ps\Xo\Domain\Model\Address {
 
 	/**
-	 * regions
-	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ps\Contact\Domain\Model\Location>
 	 * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
 	 */
 	protected $locations = null;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ps\Xo\Domain\Model\Category>
+	 * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+	 */
+	protected $productLine = null;
+
+	/**
+	 * @var \Ps\Xo\Domain\Model\Category
+	 */
+	protected $continent = null;
+
+	/**
+	 * @var \Ps\Xo\Domain\Model\Category
+	 */
+	protected $country = null;
 
 	/**
 	 * __construct
@@ -41,6 +55,7 @@ class Contact extends \Ps\Xo\Domain\Model\Address {
 	protected function initStorageObjects()	{
 		parent::initStorageObjects();
 		$this->locations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->productLine = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -72,5 +87,47 @@ class Contact extends \Ps\Xo\Domain\Model\Address {
 	 */
 	public function setLocations(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $locations) {
 		$this->locations = $locations;
+	}
+
+	/**
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage|null
+	 */
+	public function getProductLine(): ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage {
+		return $this->productLine;
+	}
+
+	/**
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage|null $productLine
+	 */
+	public function setProductLine(?\TYPO3\CMS\Extbase\Persistence\ObjectStorage $productLine): void {
+		$this->productLine = $productLine;
+	}
+
+	/**
+	 * @return \Ps\Xo\Domain\Model\Category|null
+	 */
+	public function getContinent(): ?\Ps\Xo\Domain\Model\Category {
+		return $this->continent;
+	}
+
+	/**
+	 * @param \Ps\Xo\Domain\Model\Category|null $continent
+	 */
+	public function setContinent(?\Ps\Xo\Domain\Model\Category $continent): void {
+		$this->continent = $continent;
+	}
+
+	/**
+	 * @return \Ps\Xo\Domain\Model\Category|null
+	 */
+	public function getCountry(): ?\Ps\Xo\Domain\Model\Category {
+		return $this->country;
+	}
+
+	/**
+	 * @param \Ps\Xo\Domain\Model\Category|null $country
+	 */
+	public function setCountry(?\Ps\Xo\Domain\Model\Category $country): void {
+		$this->country = $country;
 	}
 }
