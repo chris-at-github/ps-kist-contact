@@ -1,6 +1,7 @@
 <?php
 
 $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contact');
+
 return [
 	'ctrl' => [
 		'title' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_location',
@@ -144,7 +145,6 @@ return [
 				'maxitems' => 1,
 				'size' => 1,
 			],
-
 		],
 		'country' => [
 			'exclude' => true,
@@ -159,7 +159,6 @@ return [
 				'maxitems' => 1,
 				'foreign_table' => 'sys_category',
 				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentCountryCategory'] . ' ORDER BY sys_category.sorting ASC',
-				'size' => 1,
 			],
 		],
 	],

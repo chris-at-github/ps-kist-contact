@@ -1,3 +1,9 @@
+# cat=Category; type=int+; label=Parent category (UID) for product lines
+parentProductLineCategory =
+
+# cat=Category; type=int+; label=Parent category (UID) for continents
+parentContinentCategory =
+
 # cat=Category; type=int+; label=Parent category (UID) for countries
 parentCountryCategory =
 
