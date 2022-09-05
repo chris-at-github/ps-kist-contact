@@ -18,11 +18,11 @@ $GLOBALS['TCA']['tt_address']['palettes']['contactName'] = [
 ];
 
 $GLOBALS['TCA']['tt_address']['palettes']['contactContact'] = [
-	'showitem' => 'phone, email,'
+	'showitem' => 'phone, email, --linebreak--, www, '
 ];
 
 $GLOBALS['TCA']['tt_address']['palettes']['contactRelation'] = [
-	'showitem' => 'tx_contact_product_line, --linebreak--, tx_contact_continent, --linebreak--, tx_contact_country, --linebreak--,'
+	'showitem' => 'tx_contact_product_line, --linebreak--, tx_contact_continent, --linebreak--, tx_contact_country,'
 ];
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -93,37 +93,12 @@ $tmpAddressColumns = [
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_address', $tmpAddressColumns);
 
-//\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
-//	'contact',
-//	'tt_address',
-//	// Do not use the default field name ("categories") for pages, tt_content, sys_file_metadata, which is already used
-//	'tx_contact_product_line',
-//	array(
-//		// Set a custom label
-//		'label' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_location.productLine',
-//		// This field should not be an exclude-field
-//		'exclude' => true,
-//		// Override generic configuration, e.g. sort by title rather than by sorting
-//		'fieldConfiguration' => array(
-//			'foreign_table_where' => ' AND {#sys_category}.{#sys_language_uid} IN (-1, 0) ORDER BY sys_category.title ASC',
-//		),
-//		'size' => 8,
-//		// string (keyword), see TCA reference for details
-//		'l10n_mode' => 'exclude',
-//		// list of keywords, see TCA reference for details
-//		'l10n_display' => 'hideDiff',
-//		'config' => [
-//			'renderMode' => 'selectCheckBox'
-//		]
-//
-//	)
-//);
-
 // ---------------------------------------------------------------------------------------------------------------------
 // Neue Feldzuordnungen
 $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['showitem'] = '
 		record_type,
 		--palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.name;contactName,
+		company,
 		--palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.contact;contactContact,
 		--palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.relation;contactRelation,
 	,--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
@@ -132,3 +107,7 @@ $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class][
 		--palette--;;paletteHidden, 
 		--palette--;;paletteAccess,
 ';
+
+$GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['www']['config'] = [
+	'size' => 55,
+];

@@ -7,7 +7,7 @@ call_user_func(function() {
 		'Contact',
 		'Frontend',
 		[
-			\Ps\Contact\Controller\ContactController::class => 'list, show'
+			\Ps\Contact\Controller\ContactController::class => 'listing'
 		],
 		// non-cacheable actions
 		[
