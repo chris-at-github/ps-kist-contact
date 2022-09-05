@@ -100,6 +100,15 @@
 					}
 				}
 			});
+
+			// Abfrage aktiver Tab
+			// @see: https://getbootstrap.com/docs/5.0/components/navs-tabs/
+			document.querySelectorAll('#tab--continents button[data-bs-toggle="tab"]').forEach(function(node, index) {
+				node.addEventListener('shown.bs.tab', function (event) {
+					console.log(event.target); // newly activated tab
+					event.relatedTarget // previous active tab
+				})
+			});
 		});
 	});
 })();
