@@ -9,6 +9,19 @@
 			<trans-unit id="error.noResult" resname="error.noResult">
 				<target>Keine Kontakte gefunden. Bitte geben Sie eine korrekte Postleitzahl an.</target>
 			</trans-unit>
+
+			<trans-unit id="country" resname="country">
+				<target>Land</target>
+			</trans-unit>
+			<trans-unit id="provider" resname="provider">
+				<target>Ansprechpartner</target>
+			</trans-unit>
+			<trans-unit id="productLine" resname="productLine">
+				<target>Produktsparte</target>
+			</trans-unit>
+			<trans-unit id="contact" resname="contact">
+				<target>Kontakt</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
