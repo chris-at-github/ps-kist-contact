@@ -14,7 +14,11 @@ if(isset($GLOBALS['TCA']['tt_address']['columns']['record_type']) === true) {
 // ---------------------------------------------------------------------------------------------------------------------
 // Neue Paletten
 $GLOBALS['TCA']['tt_address']['palettes']['contactName'] = [
-	'showitem' => 'gender, --linebreak--, first_name, last_name,'
+	'showitem' => 'gender, --linebreak--, first_name, last_name, --linebreak--, company,'
+];
+
+$GLOBALS['TCA']['tt_address']['palettes']['contactDescription'] = [
+	'showitem' => 'description'
 ];
 
 $GLOBALS['TCA']['tt_address']['palettes']['contactContact'] = [
@@ -98,9 +102,9 @@ $tmpAddressColumns = [
 $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['showitem'] = '
 		record_type,
 		--palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.name;contactName,
-		company,
 		--palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.contact;contactContact,
 		--palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.relation;contactRelation,
+		--palette--;;contactDescription,
 	,--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
 		--palette--;;language,
 	--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
@@ -110,4 +114,10 @@ $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class][
 
 $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['www']['config'] = [
 	'size' => 55,
+];
+
+$GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['description'] = [
+	'config' => [
+		'richtextConfiguration' => 'xoDefault',
+	]
 ];
