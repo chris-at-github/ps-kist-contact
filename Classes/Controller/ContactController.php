@@ -100,10 +100,7 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			];
 		}
 
-		DebuggerUtility::var_dump($productLines);
-
 		$this->view->assign('productLines', $productLines);
-		//$this->view->assign('countries', $this->countryRepository->findAllByLocations(['parent' => (int) $extensionConfiguration['parentCountryCategory']]));
 		$this->view->assign('record', $this->configurationManager->getContentObject()->data);
 	}
 
