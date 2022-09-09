@@ -17,6 +17,7 @@ plugin.tx_contact {
 			20 = EXT:xo/Resources/Private/Extensions/Xo/Partials/
 			30 = EXT:xna/Resources/Private/Extensions/Contact/Partials/
 			40 = {$plugin.tx_contact.view.partialRootPath}
+			50 = EXT:xo/Resources/Private/Extensions/FluidStyledContent/Partials/
 		}
 	}
 
