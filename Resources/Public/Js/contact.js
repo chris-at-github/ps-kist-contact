@@ -30,6 +30,8 @@
 				let data = new FormData(form);
 				let uri = form.getAttribute('action');
 
+				console.log(data);
+
 				// Dokumenten-Klasse
 				document.body.classList.add('is-contact-loading');
 
@@ -49,11 +51,59 @@
 				event.preventDefault();
 			});
 
+			// Produktsparte-Auswahl
+			node.querySelector('.contact-search--product-lines').addEventListener('change', function(event) {
+				let value = parseInt(this.value);
+
+				let target = {
+					country: node.querySelector('.contact-search--countries'),
+					zip: node.querySelector('.contact-search--zip'),
+					button: node.querySelector('button[type="submit"]')
+				};
+
+				// Erstmal alle weiteren Bedienelemente sperren
+				target.button.disabled = true;
+				target.country.disabled = true;
+				target.zip.disabled = true;
+				target.zip.value = '';
+
+				// Produktsparte ausgewaehlt -> Laender neu zuordnen
+				if(value !== 0) {
+
+					// bestehende Laender entfernen (ausser den leeren Standardwert)
+					// @see: https://stackoverflow.com/questions/3364493/how-do-i-clear-all-options-in-a-dropdown-box
+					let length = target.country.options.length - 1;
+					for(let i = length; i >= 0; i--) {
+						if(parseInt(target.country.options[i].value) !== 0) {
+							target.country.options[i] = null;
+						}
+					}
+
+					if(typeof(xna.data.productLines[value]) !== 'undefined') {
+
+						// neue Laenderauswahl hinzugefuegen
+						// @see: https://stackoverflow.com/questions/6601028/how-to-populate-the-options-of-a-select-element-in-javascript
+						for(let i in xna.data.productLines[value].countries) {
+							let option = document.createElement('option');
+									option.value = xna.data.productLines[value].countries[i].uid;
+									option.innerText = xna.data.productLines[value].countries[i].title;
+
+							target.country.appendChild(option);
+						}
+
+						if(target.country.options.length !== 0) {
+							target.country.disabled = false;
+						}
+					}
+				}
+			});
+
 			// Laenderauswahl
 			node.querySelector('.contact-search--countries').addEventListener('change', function(event) {
 				let value = parseInt(this.value);
 
 				let target = {
+					productLine: node.querySelector('.contact-search--product-lines'),
 					zip: node.querySelector('.contact-search--zip'),
 					button: node.querySelector('button[type="submit"]')
 				};
@@ -64,7 +114,7 @@
 					// Button sperren
 					target.button.disabled = true;
 
-				} else if(typeof(xna.data.contact[value]) !== 'undefined') {
+				} else if(typeof(xna.data.productLines[target.productLine.value].countries[value]) !== 'undefined') {
 
 					// Button freigeben
 					target.button.disabled = false;
@@ -72,9 +122,9 @@
 					// es wurde ein Eintrag ausgewaehlt zu dem es eine Konfiguration gibt -> also keine PLZ-Eingabe noetig
 					// 1. Zip Feld freischalten
 					// 2. Ober-Variable zipRegex beschreiben
-					if(xna.data.contact[value].zipRegex !== '') {
+					if(xna.data.productLines[target.productLine.value].countries[value].zipRegex !== '') {
 						target.zip.disabled = false;
-						zipRegex = xna.data.contact[value].zipRegex;
+						zipRegex = xna.data.productLines[target.productLine.value].countries[value].zipRegex;
 
 					// 1. Zip Feld sperren
 					// 2. Zip Feld leeren

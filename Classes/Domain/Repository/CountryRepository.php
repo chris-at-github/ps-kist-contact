@@ -35,7 +35,7 @@ class CountryRepository extends CategoryRepository {
 		/** @var QueryBuilder $queryBuilder */
 		$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_contact_domain_model_location')->createQueryBuilder();
 		$statement  = $queryBuilder
-			->select('*')
+			->select('sys_category.uid', 'sys_category.title', 'sys_category.tx_contact_zip_regex AS zipRegex', 'tx_contact_domain_model_location.product_line AS productLine')
 			->from('tx_contact_domain_model_location')
 			->join(
 				'tx_contact_domain_model_location',
@@ -44,7 +44,8 @@ class CountryRepository extends CategoryRepository {
 				$queryBuilder->expr()->eq('tx_contact_domain_model_location.country', $queryBuilder->quoteIdentifier('sys_category.uid'))
 			)
 			->where(
-				$queryBuilder->expr()->neq('country', 0)
+				$queryBuilder->expr()->neq('country', 0),
+				$queryBuilder->expr()->neq('product_line', 0)
 			)
 			->groupBy('country')
 			->orderBy('sys_category.sorting')
@@ -52,6 +53,47 @@ class CountryRepository extends CategoryRepository {
 
 		while($row = $statement->fetch()) {
 			$countries[] = $row;
+		}
+
+		return $countries;
+	}
+
+	/**
+	 * @param array $options
+	 */
+	public function findAllByProductLine(array $options) {
+
+		$countries = [];
+
+		/** @var QueryBuilder $queryBuilder */
+		$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_contact_domain_model_location')->createQueryBuilder();
+		$statement  = $queryBuilder
+			->select('sys_category.uid', 'sys_category.title', 'sys_category.tx_contact_zip_regex AS zipRegex', 'tx_contact_domain_model_location.zip AS zip', 'tx_contact_domain_model_location.product_line AS productLine')
+			->addSelectLiteral(
+				$queryBuilder->expr()->max('tx_contact_domain_model_location.zip', 'isRegex')
+			)
+			->from('tx_contact_domain_model_location')
+			->join(
+				'tx_contact_domain_model_location',
+				'sys_category',
+				'sys_category',
+				$queryBuilder->expr()->eq('tx_contact_domain_model_location.country', $queryBuilder->quoteIdentifier('sys_category.uid'))
+			)
+			->where(
+				$queryBuilder->expr()->neq('country', 0),
+				$queryBuilder->expr()->eq('product_line', $options['productLine'])
+			)
+			->groupBy('sys_category.uid')
+			->orderBy('sys_category.sorting')
+			->addOrderBy('tx_contact_domain_model_location.zip', 'DESC')
+			->execute();
+
+		while($row = $statement->fetch()) {
+			if(empty($row['isRegex']) === true) {
+				$row['zipRegex'] = '';
+			}
+
+			$countries[(int) $row['uid']] = $row;
 		}
 
 		return $countries;

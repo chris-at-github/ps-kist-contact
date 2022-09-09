@@ -17,8 +17,7 @@ namespace Ps\Contact\Domain\Model;
 /**
  * Location
  */
-class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
-{
+class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
     /**
      * zip
@@ -40,6 +39,13 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \Ps\Contact\Domain\Model\Country
      */
     protected $country = null;
+
+	/**
+	 * country
+	 *
+	 * @var \Ps\Xo\Domain\Model\Category
+	 */
+	protected $productLine = null;
 
     /**
      * Returns the zip
@@ -103,4 +109,18 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->country = $country;
     }
+
+	/**
+	 * @return \Ps\Xo\Domain\Model\Category|null
+	 */
+	public function getProductLine(): ?\Ps\Xo\Domain\Model\Category {
+		return $this->productLine;
+	}
+
+	/**
+	 * @param \Ps\Xo\Domain\Model\Category|null $productLine
+	 */
+	public function setProductLine(?\Ps\Xo\Domain\Model\Category $productLine): void {
+		$this->productLine = $productLine;
+	}
 }

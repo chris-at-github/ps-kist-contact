@@ -24,6 +24,9 @@
 			<trans-unit id="tx_contact_domain_model_location.country" resname="tx_contact_domain_model_location.country">
 				<source>Country</source>
 			</trans-unit>
+			<trans-unit id="tx_contact_domain_model_location.product_line" resname="tx_contact_domain_model_location.product_line">
+				<source>Product Line</source>
+			</trans-unit>
 			<trans-unit id="tx_contact_domain_model_country" resname="tx_contact_domain_model_country">
 				<source>Country</source>
 			</trans-unit>

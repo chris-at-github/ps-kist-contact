@@ -6,7 +6,7 @@ return [
 	'ctrl' => [
 		'title' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_location',
 		'label' => 'zip',
-		'label_alt' => 'country',
+		'label_alt' => 'country, product_line',
 		'label_alt_force' => true,
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -29,7 +29,7 @@ return [
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, zip, contact, country',
 	],
 	'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, zip, contact, country, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, zip, contact, country, product_line, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
 	],
 	'columns' => [
 		'sys_language_uid' => [
@@ -159,6 +159,21 @@ return [
 				'maxitems' => 1,
 				'foreign_table' => 'sys_category',
 				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentCountryCategory'] . ' ORDER BY sys_category.sorting ASC',
+			],
+		],
+		'product_line' => [
+			'exclude' => true,
+			'label' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_location.product_line',
+			'config' => [
+				'type' => 'select',
+				'renderType' => 'selectSingle',
+				'items' => [
+					['', 0],
+				],
+				'size' => 1,
+				'maxitems' => 1,
+				'foreign_table' => 'sys_category',
+				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentProductLineCategory'] . ' ORDER BY sys_category.sorting ASC',
 			],
 		],
 	],

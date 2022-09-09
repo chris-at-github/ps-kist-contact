@@ -30,6 +30,10 @@ class ContactRepository extends \Ps\Xo\Domain\Repository\AddressRepository {
 	protected function getMatches($query, $options) {
 		$matches = parent::getMatches($query, $options);
 
+		if(isset($options['location']['productLine']) === true) {
+			$matches[] = $query->equals('locations.productLine', $options['location']['productLine']);
+		}
+
 		if(isset($options['location']['zip']) === true) {
 			$matches[] = $query->equals('locations.zip', $options['location']['zip']);
 		}

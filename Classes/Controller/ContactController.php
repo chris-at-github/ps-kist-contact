@@ -13,6 +13,8 @@ use JeroenDesloovere\VCard\Property\Telephone;
 use JeroenDesloovere\VCard\VCard;
 use Ps\Contact\Domain\Repository\ContactRepository;
 use Ps\Contact\Domain\Repository\CountryRepository;
+use Ps\Xo\Domain\Model\Category;
+use Ps\Xo\Domain\Repository\CategoryRepository;
 use Ps\Xo\Service\JsonService;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -45,12 +47,19 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	protected $countryRepository = null;
 
 	/**
+	 * @var CategoryRepository
+	 */
+	protected $categoryRepository = null;
+
+	/**
 	 * @param ContactRepository $contactRepository
 	 * @param CountryRepository $countryRepository
+	 * @param CategoryRepository $categoryRepository
 	 */
-	public function __construct(ContactRepository $contactRepository, CountryRepository $countryRepository) {
+	public function __construct(ContactRepository $contactRepository, CountryRepository $countryRepository, CategoryRepository $categoryRepository) {
 		$this->contactRepository = $contactRepository;
 		$this->countryRepository = $countryRepository;
+		$this->categoryRepository = $categoryRepository;
 	}
 
 	/**
@@ -80,7 +89,21 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function formAction() {
 		$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contact');
-		$this->view->assign('countries', $this->countryRepository->findAllByLocations(['parent' => (int) $extensionConfiguration['parentCountryCategory']]));
+		$productLines = [];
+
+		/** @var Category $productLine */
+		foreach($this->categoryRepository->findAll(['parent' => (int) $extensionConfiguration['parentProductLineCategory']]) as $productLine) {
+			$productLines[(int) $productLine->getUid()] = [
+				'uid' => (int) $productLine->getUid(),
+				'title' => $productLine->getTitle(),
+				'countries' => $this->countryRepository->findAllByProductLine(['productLine' => (int) $productLine->getUid()])
+			];
+		}
+
+		DebuggerUtility::var_dump($productLines);
+
+		$this->view->assign('productLines', $productLines);
+		//$this->view->assign('countries', $this->countryRepository->findAllByLocations(['parent' => (int) $extensionConfiguration['parentCountryCategory']]));
 		$this->view->assign('record', $this->configurationManager->getContentObject()->data);
 	}
 
@@ -91,6 +114,10 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$options = [
 			'location' => []
 		];
+
+		if($this->request->hasArgument('productLine') === true) {
+			$options['location']['productLine'] = $this->request->getArgument('productLine');
+		}
 
 		if($this->request->hasArgument('country') === true) {
 			$options['location']['country'] = $this->request->getArgument('country');
