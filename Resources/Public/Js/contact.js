@@ -21,32 +21,38 @@
 			container.parentElement.style.maxHeight = height + 'px';
 		});
 
-		document.querySelectorAll('.ce-contact-search').forEach(function(node, index) {
+		document.addEventListener('contactSearchSubmit', function(event) {
+			let node = event.detail.node;
 			let form = node.querySelector('form');
 			let resultContainer = node.querySelector('.contact-search--result-container');
+			let data = new FormData(form);
+			let uri = form.getAttribute('action');
+
+			// Dokumenten-Klasse
+			document.body.classList.add('is-contact-loading');
+
+			fetch(uri, {
+				body: data,
+				method: 'post',
+			}).then(function(response) {
+				return response.text();
+
+			}).then(function(body) {
+				xna.fireEvent('contactSearchLoaded', {
+					responseBody: body,
+					resultContainer: resultContainer
+				});
+			});
+		});
+
+		document.querySelectorAll('.ce-contact-search').forEach(function(node, index) {
+			let form = node.querySelector('form');
 			let zipRegex = '';
 
 			form.addEventListener('submit', function(event) {
-				let data = new FormData(form);
-				let uri = form.getAttribute('action');
-
-				console.log(data);
-
-				// Dokumenten-Klasse
-				document.body.classList.add('is-contact-loading');
-
-				fetch(uri, {
-					body: data,
-					method: 'post',
-				}).then(function(response) {
-						return response.text();
-
-					}).then(function(body) {
-						xna.fireEvent('contactSearchLoaded', {
-							responseBody: body,
-							resultContainer: resultContainer
-						});
-					});
+				xna.fireEvent('contactSearchSubmit', {
+					node: node
+				});
 
 				event.preventDefault();
 			});
@@ -116,21 +122,30 @@
 
 				} else if(typeof(xna.data.productLines[target.productLine.value].countries[value]) !== 'undefined') {
 
-					// Button freigeben
-					target.button.disabled = false;
-
-					// es wurde ein Eintrag ausgewaehlt zu dem es eine Konfiguration gibt -> also keine PLZ-Eingabe noetig
+					// es wurde ein Eintrag ausgewaehlt zu dem es nur eine Konfiguration gibt -> also keine PLZ-Eingabe noetig
 					// 1. Zip Feld freischalten
 					// 2. Ober-Variable zipRegex beschreiben
 					if(xna.data.productLines[target.productLine.value].countries[value].zipRegex !== '') {
 						target.zip.disabled = false;
+						target.zip.focus();
 						zipRegex = xna.data.productLines[target.productLine.value].countries[value].zipRegex;
+
+						// Button freigeben
+						target.button.disabled = false;
 
 					// 1. Zip Feld sperren
 					// 2. Zip Feld leeren
 					} else {
 						target.zip.value = '';
 						target.zip.disabled = true;
+
+						// Button freigeben
+						target.button.disabled = false;
+						
+						// Formular direkt absenden
+						xna.fireEvent('contactSearchSubmit', {
+							node: node
+						});
 					}
 				}
 			});
@@ -143,6 +158,13 @@
 
 					if(window.getSelection().toString().length !== 0) {
 						value = value.replace(window.getSelection().toString(), '');
+					}
+
+					// Formular bei Enter abschicken
+					if(event.keyCode === 13 || event.key === 'Enter') {
+						xna.fireEvent('contactSearchSubmit', {
+							node: node
+						});
 					}
 
 					if(value.match(regex) === null) {
