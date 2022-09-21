@@ -177,9 +177,35 @@
 			// @see: https://getbootstrap.com/docs/5.0/components/navs-tabs/
 			document.querySelectorAll('#tab--continents button[data-bs-toggle="tab"]').forEach(function(node, index) {
 				node.addEventListener('shown.bs.tab', function (event) {
-					console.log(event.target); // newly activated tab
-					event.relatedTarget // previous active tab
+					let activeTab = event.target;
+
+					// bisherigen aktiven Kontinent deaktivieren
+					let activeContinent = document.querySelector('.contact-listing--map-continent-active');
+
+					if(activeContinent !== null) {
+						activeContinent.setAttribute('class', 'contact-listing--map-continent contact-listing--map-continent-default');
+					}
+
+					// kuenftigen Continent identifizieren und aktivieren
+					let targetContinent = document.querySelector('#' + activeTab.getAttribute('data-target-continent'));
+
+					if(targetContinent !== null) {
+						targetContinent.setAttribute('class', 'contact-listing--map-continent contact-listing--map-continent-active');
+					}
 				})
+			});
+
+			document.querySelectorAll('.contact-listing--map-continent').forEach(function(node, index) {
+				node.addEventListener('click', function() {
+					if(typeof(window.bootstrap.tab) !== 'undefined') {
+						let targetTab = document.querySelector('button[data-target-continent="' + node.getAttribute('id') + '"]');
+
+						if(targetTab !== null) {
+							let targetObject = new window.bootstrap.tab(targetTab);
+									targetObject.show();
+						}
+					}
+				});
 			});
 		});
 	});

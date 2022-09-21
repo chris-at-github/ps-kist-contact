@@ -24,5 +24,8 @@ plugin.tx_contact {
 
 		# cat=plugin.tx_contact//a; type=string; label=Page type of ajax search
 		searchRequestPageType =
+
+		# cat=plugin.tx_contact//a; type=string; label=Filepath to svg file for the map
+		listingMapFilepath =
 	}
 }
