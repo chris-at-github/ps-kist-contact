@@ -154,28 +154,31 @@ class ImportCommand extends Command {
 				}
 
 			} else {
-				$contact = $this->findContactByIdentifier(trim($data[$index['e-mail']]));
-				$country = $this->findCountryByIdentifier(trim($data[$index['land']]));
+//				if($i < 10) {
+					$contact = $this->findContactByIdentifier(trim($data[$index['e-mail']]));
+					$country = $this->findCountryByIdentifier(trim($data[$index['land']]));
 
-				if($contact === null) {
-					$contact = $this->importContact($data, $index);
-				}
+					if($contact === null) {
+						$contact = $this->importContact($data, $index);
+					}
 
-				if(empty($contact) === false && empty($country) === false) {
-					$queryBuilder
-						->insert('tx_contact_domain_model_location')
-						->values([
-							'pid' => (int) 115,
-							'tstamp' => time(),
-							'crdate' => time(),
-							'cruser_id' => 0,
-							'sorting' => $row,
-							'zip' => trim($data[$index['plz']]),
-							'contact' => $contact,
-							'country' => $country
-						])
-						->execute();
-				}
+					if(empty($contact) === false && empty($country) === false) {
+						$queryBuilder
+							->insert('tx_contact_domain_model_location')
+							->values([
+								'pid' => (int) 492,
+								'tstamp' => time(),
+								'crdate' => time(),
+								'cruser_id' => 0,
+								'sorting' => $i,
+								'zip' => trim($data[$index['plz']]),
+								'contact' => $contact,
+								'country' => $country,
+								'product_line' => 203
+							])
+							->execute();
+					}
+//				}
 			}
 		}
 	}
