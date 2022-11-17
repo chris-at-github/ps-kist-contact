@@ -69,15 +69,18 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function listingAction() {
 		$this->view->assign('record', $this->configurationManager->getContentObject()->data);
-		$this->view->assign('contacts', $this->contactRepository->findAll([], [
+		$this->view->assign('contacts', $this->contactRepository->findAll([
+			'not' => [
+				'continent' => 0,
+				'country' => 0,
+			]
+		], [
 			'continent.sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
 			'country.sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
 		]));
 	}
 
 	/**
-	 * action show
-	 *
 	 * @param \Ps\Contact\Domain\Model\Contact $contact
 	 * @return void
 	 */

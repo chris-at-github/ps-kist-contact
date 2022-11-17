@@ -42,6 +42,17 @@ class ContactRepository extends \Ps\Xo\Domain\Repository\AddressRepository {
 			$matches[] = $query->equals('locations.country', $options['location']['country']);
 		}
 
+		// NOT
+		if(isset($options['not']) === true) {
+			if(isset($options['not']['continent']) === true) {
+				$matches['notContinent'] = $query->logicalNot($query->equals('continent', (int) $options['not']['continent']));
+			}
+
+			if(isset($options['not']['country']) === true) {
+				$matches['notCountry'] = $query->logicalNot($query->equals('country', (int) $options['not']['country']));
+			}
+		}
+
 		return $matches;
 	}
 }
