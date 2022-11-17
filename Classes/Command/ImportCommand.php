@@ -139,7 +139,7 @@ class ImportCommand extends Command {
 	 */
 	protected function importFile(File $file) {
 
-		GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_contact_domain_model_location')->truncate('tx_contact_domain_model_location');
+		//GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_contact_domain_model_location')->truncate('tx_contact_domain_model_location');
 
 		$index = [];
 		$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_contact_domain_model_location');
