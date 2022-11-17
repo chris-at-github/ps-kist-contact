@@ -16,3 +16,4 @@ $tmpSysCategoryColumns = [
 ];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_category', $tmpSysCategoryColumns);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('sys_category', '--linebreak--, tx_contact_zip_regex,', '', 'after:description');
