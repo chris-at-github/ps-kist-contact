@@ -22,13 +22,12 @@ class Contact extends \Ps\Xo\Domain\Model\Address {
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ps\Contact\Domain\Model\Location>
-	 * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+	 * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
 	 */
 	protected $locations = null;
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ps\Xo\Domain\Model\Category>
-	 * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
 	 */
 	protected $productLine = null;
 
