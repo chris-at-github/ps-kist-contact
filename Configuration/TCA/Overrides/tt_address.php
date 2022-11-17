@@ -14,7 +14,7 @@ if(isset($GLOBALS['TCA']['tt_address']['columns']['record_type']) === true) {
 // ---------------------------------------------------------------------------------------------------------------------
 // Neue Paletten
 $GLOBALS['TCA']['tt_address']['palettes']['contactName'] = [
-	'showitem' => 'gender, --linebreak--, first_name, last_name, --linebreak--, company,'
+	'showitem' => 'gender, --linebreak--, name, --linebreak--, first_name, last_name, --linebreak--, company,'
 ];
 
 $GLOBALS['TCA']['tt_address']['palettes']['contactDescription'] = [
@@ -114,6 +114,13 @@ $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class][
 
 $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['www']['config'] = [
 	'size' => 55,
+];
+
+$GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['name']['label'] = 'Name (intern)';
+$GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['name'] = [
+	'config' => [
+		'readOnly' => false,
+	]
 ];
 
 $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['description'] = [
