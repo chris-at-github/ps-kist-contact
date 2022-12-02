@@ -20,8 +20,13 @@ $tx-contact--layout-search: true !default;
 			padding: rem(10px 15px);
 		}
 
-		.address--name + .address--item {
+		.address--name + .address--item,
+		.address--company + .address--item {
 			margin: $spacing-default 0 0 0;
+		}
+
+		.address--name + .address--company {
+			margin: 0;
 		}
 
 		.contact-item--vcard {

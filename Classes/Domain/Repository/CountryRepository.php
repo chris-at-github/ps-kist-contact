@@ -64,6 +64,7 @@ class CountryRepository extends CategoryRepository {
 	public function findAllByProductLine(array $options) {
 
 		$countries = [];
+		$i = 1;
 
 		/** @var QueryBuilder $queryBuilder */
 		$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_contact_domain_model_location')->createQueryBuilder();
@@ -84,7 +85,7 @@ class CountryRepository extends CategoryRepository {
 				$queryBuilder->expr()->eq('product_line', $options['productLine'])
 			)
 			->groupBy('sys_category.uid')
-			->orderBy('sys_category.sorting')
+			->orderBy('sys_category.title')
 			->addOrderBy('tx_contact_domain_model_location.zip', 'DESC')
 			->execute();
 
@@ -92,6 +93,8 @@ class CountryRepository extends CategoryRepository {
 			if(empty($row['isRegex']) === true) {
 				$row['zipRegex'] = '';
 			}
+
+			$row['sorting'] = $i++;
 
 			$countries[(int) $row['uid']] = $row;
 		}

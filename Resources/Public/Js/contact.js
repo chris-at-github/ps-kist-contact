@@ -87,15 +87,24 @@
 
 					if(typeof(xna.data.productLines[value]) !== 'undefined') {
 
+						// Laender nach dem sorting (aus PHP) sortieren
+						let countries = Object.values(xna.data.productLines[value].countries);
+
+						countries.sort(function(a,b) {
+							return a.sorting - b.sorting;
+						});
+
 						// neue Laenderauswahl hinzugefuegen
 						// @see: https://stackoverflow.com/questions/6601028/how-to-populate-the-options-of-a-select-element-in-javascript
-						for(let i in xna.data.productLines[value].countries) {
+						for(let i in countries) {
 							let option = document.createElement('option');
-									option.value = xna.data.productLines[value].countries[i].uid;
-									option.innerText = xna.data.productLines[value].countries[i].title;
+									option.value = countries[i].uid;
+									option.innerText = countries[i].title;
 
 							target.country.appendChild(option);
 						}
+
+						console.log(xna.data.productLines[value].countries);
 
 						if(target.country.options.length !== 0) {
 							target.country.disabled = false;

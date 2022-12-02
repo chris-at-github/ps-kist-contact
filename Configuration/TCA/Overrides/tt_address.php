@@ -117,10 +117,8 @@ $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class][
 ];
 
 $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['name']['label'] = 'Name (intern)';
-$GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['name'] = [
-	'config' => [
-		'readOnly' => false,
-	]
+$GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['name']['config'] = [
+	'readOnly' => false,
 ];
 
 $GLOBALS['TCA']['tt_address']['types'][\Ps\Contact\Domain\Model\Contact::class]['columnsOverrides']['description'] = [
