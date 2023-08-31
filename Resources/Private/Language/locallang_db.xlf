@@ -31,7 +31,10 @@
 				<source>Country</source>
 			</trans-unit>
 			<trans-unit id="tx_contact_domain_model_country.tx_contact_zip_regex" resname="tx_contact_domain_model_country.tx_contact_zip_regex">
-				<source>Tx Contact Zip Regex</source>
+				<source>Contact Zip Regex</source>
+			</trans-unit>
+			<trans-unit id="tx_contact_domain_model_country.tx_contact_country_description" resname="tx_contact_domain_model_country.tx_contact_country_description">
+				<source>Country description</source>
 			</trans-unit>
 
 			<trans-unit id="tt_address.tx_contact_product_line">

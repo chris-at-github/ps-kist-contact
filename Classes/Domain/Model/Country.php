@@ -21,11 +21,14 @@ namespace Ps\Contact\Domain\Model;
 class Country extends \Ps\Xo\Domain\Model\Category {
 
 	/**
-	 * zipRegex
-	 *
 	 * @var string
 	 */
 	protected $zipRegex = '';
+
+	/**
+	 * @var string
+	 */
+	protected $countryDescription = '';
 
 	/**
 	 * @return string $zipRegex
@@ -40,5 +43,13 @@ class Country extends \Ps\Xo\Domain\Model\Category {
 	 */
 	public function setZipRegex($zipRegex) {
 		$this->zipRegex = $zipRegex;
+	}
+
+	public function getCountryDescription(): string {
+		return $this->countryDescription;
+	}
+
+	public function setCountryDescription(string $countryDescription): void {
+		$this->countryDescription = $countryDescription;
 	}
 }

@@ -37,7 +37,7 @@ class Contact extends \Ps\Xo\Domain\Model\Address {
 	protected $continent = null;
 
 	/**
-	 * @var \Ps\Xo\Domain\Model\Category
+	 * @var \Ps\Contact\Domain\Model\Country
 	 */
 	protected $country = null;
 

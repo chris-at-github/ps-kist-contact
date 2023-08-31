@@ -13,5 +13,6 @@ CREATE TABLE tx_contact_domain_model_location (
 );
 
 CREATE TABLE sys_category (
-	tx_contact_zip_regex varchar(255) DEFAULT '' NOT NULL
+	tx_contact_zip_regex varchar(255) DEFAULT '' NOT NULL,
+	tx_contact_country_description text
 );

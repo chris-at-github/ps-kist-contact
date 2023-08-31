@@ -25,6 +25,9 @@ return [
 			'zipRegex' => [
 				'fieldName' => 'tx_contact_zip_regex'
 			],
+			'countryDescription' => [
+				'fieldName' => 'tx_contact_country_description'
+			],
 		]
 	],
 ];
