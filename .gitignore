@@ -3,6 +3,5 @@
 /Tests
 /Configuration/ExtensionBuilder
 /ExtensionBuilder.json
-composer.lock
 /node_modules
 /node_modules/

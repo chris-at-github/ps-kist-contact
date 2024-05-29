@@ -18,7 +18,7 @@ namespace Ps\Contact\Domain\Model;
 /**
  * Contact
  */
-class Contact extends \Ps\Xo\Domain\Model\Address {
+class Contact extends \Ps14\Foundation\Domain\Model\Address {
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ps\Contact\Domain\Model\Location>
@@ -27,12 +27,12 @@ class Contact extends \Ps\Xo\Domain\Model\Address {
 	protected $locations = null;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ps\Xo\Domain\Model\Category>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ps14\Foundation\Domain\Model\Category>
 	 */
 	protected $productLine = null;
 
 	/**
-	 * @var \Ps\Xo\Domain\Model\Category
+	 * @var \Ps14\Foundation\Domain\Model\Category
 	 */
 	protected $continent = null;
 
@@ -46,13 +46,13 @@ class Contact extends \Ps\Xo\Domain\Model\Address {
 	 */
 	public function __construct()	{
 		$this->initStorageObjects();
+		parent::__construct();
 	}
 
 	/**
 	 * @return void
 	 */
 	protected function initStorageObjects()	{
-		parent::initStorageObjects();
 		$this->locations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->productLine = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
@@ -103,30 +103,30 @@ class Contact extends \Ps\Xo\Domain\Model\Address {
 	}
 
 	/**
-	 * @return \Ps\Xo\Domain\Model\Category|null
+	 * @return \Ps14\Foundation\Domain\Model\Category|null
 	 */
-	public function getContinent(): ?\Ps\Xo\Domain\Model\Category {
+	public function getContinent(): ?\Ps14\Foundation\Domain\Model\Category {
 		return $this->continent;
 	}
 
 	/**
-	 * @param \Ps\Xo\Domain\Model\Category|null $continent
+	 * @param \Ps14\Foundation\Domain\Model\Category|null $continent
 	 */
-	public function setContinent(?\Ps\Xo\Domain\Model\Category $continent): void {
+	public function setContinent(?\Ps14\Foundation\Domain\Model\Category $continent): void {
 		$this->continent = $continent;
 	}
 
-	/**
-	 * @return \Ps\Xo\Domain\Model\Category|null
-	 */
-	public function getCountry(): ?\Ps\Xo\Domain\Model\Category {
-		return $this->country;
-	}
-
-	/**
-	 * @param \Ps\Xo\Domain\Model\Category|null $country
-	 */
-	public function setCountry(?\Ps\Xo\Domain\Model\Category $country): void {
-		$this->country = $country;
-	}
+//	/**
+//	 * @return \Ps14\Foundation\Domain\Model\Category|null
+//	 */
+//	public function getCountry(): ?\Ps14\Foundation\Domain\Model\Category {
+//		return $this->country;
+//	}
+//
+//	/**
+//	 * @param \Ps\Xo\Domain\Model\Category|null $country
+//	 */
+//	public function setCountry(?\Ps14\Foundation\Domain\Model\Category $country): void {
+//		$this->country = $country;
+//	}
 }

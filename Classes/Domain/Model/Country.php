@@ -18,7 +18,7 @@ namespace Ps\Contact\Domain\Model;
 /**
  * Country
  */
-class Country extends \Ps\Xo\Domain\Model\Category {
+class Country extends \Ps14\Foundation\Domain\Model\Category {
 
 	/**
 	 * @var string

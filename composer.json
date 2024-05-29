@@ -1,17 +1,22 @@
 {
 	"name": "ps/contact",
 	"type": "typo3-cms-extension",
-	"description": "",
+	"description": "TYPO3 contact extension based on tt_address",
+	"keywords": [
+		"TYPO3",
+		"extension"
+	],
 	"authors": [
 		{
 			"name": "Christian Pschorr",
-			"role": "Developer"
+			"email": "pschorr.christian@gmail.com"
 		}
 	],
 	"config": {
 		"vendor-dir": "Vendor"
 	},
 	"require": {
+		"typo3/cms-core": "^12.4",
 		"jeroendesloovere/vcard": "dev-2.0.0-dev"
 	},
 	"autoload": {
@@ -20,13 +25,9 @@
 			"JeroenDesloovere\\VCard\\": "Vendor/jeroendesloovere/vcard"
 		}
 	},
-	"autoload-dev": {
-		"psr-4": {
-			"Ps\\Contact\\Tests\\": "Tests"
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "contact"
 		}
-	},
-	"replace": {
-		"ps/contact": "self.version",
-		"typo3-ter/contact": "self.version"
 	}
 }

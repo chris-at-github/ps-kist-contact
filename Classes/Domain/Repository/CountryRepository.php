@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Ps\Contact\Domain\Repository;
 
-use Ps\Xo\Domain\Repository\CategoryRepository;
+use \Ps14\Foundation\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

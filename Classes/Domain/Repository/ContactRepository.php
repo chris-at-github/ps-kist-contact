@@ -20,7 +20,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 /**
  * The repository for Contacts
  */
-class ContactRepository extends \Ps\Xo\Domain\Repository\AddressRepository {
+class ContactRepository extends \Ps14\Foundation\Domain\Repository\AddressRepository {
 
 	/**
 	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query

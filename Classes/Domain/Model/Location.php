@@ -43,7 +43,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * country
 	 *
-	 * @var \Ps\Xo\Domain\Model\Category
+	 * @var \Ps14\Foundation\Domain\Model\Category
 	 */
 	protected $productLine = null;
 
@@ -111,16 +111,16 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     }
 
 	/**
-	 * @return \Ps\Xo\Domain\Model\Category|null
+	 * @return \Ps14\Foundation\Domain\Model\Category|null
 	 */
-	public function getProductLine(): ?\Ps\Xo\Domain\Model\Category {
+	public function getProductLine(): ?\Ps14\Foundation\Domain\Model\Category {
 		return $this->productLine;
 	}
 
 	/**
-	 * @param \Ps\Xo\Domain\Model\Category|null $productLine
+	 * @param \Ps14\Foundation\Domain\Model\Category|null $productLine
 	 */
-	public function setProductLine(?\Ps\Xo\Domain\Model\Category $productLine): void {
+	public function setProductLine(?\Ps14\Foundation\Domain\Model\Category $productLine): void {
 		$this->productLine = $productLine;
 	}
 }

@@ -7,7 +7,7 @@ services:
   Ps\Contact\:
     resource: '../Classes/*'
 
-  Ps\Xo\Domain\Repository\CategoryRepository:
+  Ps14\Foundation\Domain\Repository\CategoryRepository:
     public: true
 
   Ps\Contact\Command\ImportCommand:
