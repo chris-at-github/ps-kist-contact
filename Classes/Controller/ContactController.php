@@ -64,7 +64,7 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	/**
 	 * action list
 	 *
-	 * @return void
+	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	public function listingAction() {
 		$this->view->assign('record', $this->configurationManager->getContentObject()->data);
@@ -77,25 +77,31 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			'continent.sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
 			'country.sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
 		]));
+
+		return $this->htmlResponse();
 	}
 
 	/**
 	 * @param \Ps\Contact\Domain\Model\Contact $contact
-	 * @return void
+	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	public function showAction(\Ps\Contact\Domain\Model\Contact $contact) {
 		$this->view->assign('contact', $contact);
+		return $this->htmlResponse();
 	}
 
 	/**
-	 * @return void
+	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	public function formAction() {
-		$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contact');
+//		$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contact');
 		$productLines = [];
 
+		/** @var Category $productLineMain */
+		$productLineMain = $this->categoryRepository->findByOption(['identifier' => 'contact-product-lines']);
+
 		/** @var Category $productLine */
-		foreach($this->categoryRepository->findAll(['parent' => (int) $extensionConfiguration['parentProductLineCategory']]) as $productLine) {
+		foreach($this->categoryRepository->findAllByOption(['parent' => (int) $productLineMain->getUid()]) as $productLine) {
 			$productLines[(int) $productLine->getUid()] = [
 				'uid' => (int) $productLine->getUid(),
 				'title' => $productLine->getTitle(),
@@ -104,11 +110,12 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 
 		$this->view->assign('productLines', $productLines);
-		$this->view->assign('record', $this->configurationManager->getContentObject()->data);
+		$this->view->assign('record', $this->request->getAttribute('currentContentObject')->data);
+		return $this->htmlResponse();
 	}
 
 	/**
-	 * @return void
+	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	public function searchAction() {
 		$options = [
@@ -128,6 +135,7 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 
 		$this->view->assign('contacts', $this->contactRepository->findAll($options));
+		return $this->htmlResponse();
 	}
 
 	/**
