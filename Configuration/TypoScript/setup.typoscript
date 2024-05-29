@@ -70,6 +70,21 @@ vcard {
 	}
 }
 
+tt_content.list.dataProcessing {
+	200 {
+		contact_search {
+			importCss {
+				10 = /assets/css/modules/contact.css
+			}
+
+			importJs {
+#				10 = /assets/js/components/tab.js
+				20 = /assets/js/modules/contact.js
+			}
+		}
+	}
+}
+
 #tt_content.list.dataProcessing.200 {
 #	contact_search {
 #		importCss {
