@@ -116,12 +116,12 @@ class Contact extends \Ps14\Foundation\Domain\Model\Address {
 		$this->continent = $continent;
 	}
 
-//	/**
-//	 * @return \Ps14\Foundation\Domain\Model\Category|null
-//	 */
-//	public function getCountry(): ?\Ps14\Foundation\Domain\Model\Category {
-//		return $this->country;
-//	}
+	/**
+	 * @return \Ps14\Foundation\Domain\Model\Category|null
+	 */
+	public function getCountryCategory(): ?\Ps14\Foundation\Domain\Model\Category {
+		return $this->country;
+	}
 //
 //	/**
 //	 * @param \Ps\Xo\Domain\Model\Category|null $country

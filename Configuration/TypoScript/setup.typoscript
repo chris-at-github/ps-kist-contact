@@ -72,14 +72,25 @@ vcard {
 
 tt_content.list.dataProcessing {
 	200 {
+		contact_frontend {
+			importCss {
+				10 = /assets/css/components/tab.css
+				20 = /assets/css/modules/contact.css
+			}
+
+			importJs {
+				10 = /assets/js/components/tab.js
+				20 = /assets/js/modules/contact.js
+			}
+		}
+
 		contact_search {
 			importCss {
 				10 = /assets/css/modules/contact.css
 			}
 
 			importJs {
-#				10 = /assets/js/components/tab.js
-				20 = /assets/js/modules/contact.js
+				10 = /assets/js/modules/contact.js
 			}
 		}
 	}

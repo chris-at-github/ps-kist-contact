@@ -1,6 +1,89 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:layout name="Default" />
+<f:section name="Header" />
 <f:section name="Main">
-	<f:debug>{contacts}</f:debug>
+
+	<div class="contact-listing--map-container">
+		<fo:svg.inline source="{settings.listingMapFilepath}" />
+	</div>
+
+	<header class="contact-listing--header ce-header ce-header--layout-2">
+		<f:render partial="Header/Header" arguments="{header: record.header, layout: record.header_layout}" />
+	</header>
+
+	<div class="contact-listing--tabs tabs">
+		<ul class="tab--container nav" id="tab--continents" role="tablist">
+			<fo:grouped each="{contacts}" groupBy="continent" groupKey="continent" as="countries" iteration="iterator" removeEmpty="true">
+				<li role="presentation">
+					<button id="tab-continent-{continent.uid}" class="{f:if(condition: iterator.isFirst, then: 'active')}" data-target-continent="contact-listing--map-continent-{continent.identifier}" data-bs-toggle="tab" data-bs-target="#tab-content-continent-{continent.uid}" type="button" role="tab" aria-controls="#tab-content-continent-{continent.uid}" aria-selected="{f:if(condition: iterator.isFirst, then: 'true', else: 'false')}">{continent.title}</button>
+				</li>
+			</fo:grouped>
+		</ul>
+
+		<div class="tab--content">
+			<fo:grouped each="{contacts}" groupBy="continent" groupKey="continent" as="countries" iteration="iterator" removeEmpty="true">
+
+				<div class="tab--pane fade {f:if(condition: iterator.isFirst, then: 'show active')}" id="tab-content-continent-{continent.uid}" role="tabpanel" aria-labelledby="tab-continent-{continent.uid}">
+					<table class="table--layout-0 contact-listing--table">
+						<thead>
+						<tr>
+							<th><f:translate key="country" /></th>
+							<th><f:translate key="provider" /></th>
+							<th><f:translate key="productLine" /></th>
+							<th><f:translate key="contact" /></th>
+						</tr>
+						</thead>
+						<tbody>
+							<f:for each="{countries}" as="country">
+								<f:if condition="{country}">
+									<f:render section="Item" arguments="{country: country}" />
+								</f:if>
+							</f:for>
+						</tbody>
+					</table>
+				</div>
+
+			</fo:grouped>
+
+		</div>
+	</div>
+</f:section>
+
+<f:section name="Item">
+	<tr>
+		<td>
+			<h3 class="contact-listing--country-title">{country.countryCategory.title}</h3>
+			<f:if condition="{country.description}">
+				<div class="contact-listing--country-description address--item address--description"><f:format.html>{country.description}</f:format.html></div>
+			</f:if>
+		</td>
+		<td>
+			<f:if condition="{country.firstName} && {country.lastName}">
+				<div class="contact-listing--country-name address--item address--name"><f:render partial="Components/Person" section="Fullname" arguments="{person: country}" /></div>
+			</f:if>
+
+			<f:if condition="{country.company}">
+				<div class="contact-listing--country-company address--item address--company">{country.company}</div>
+			</f:if>
+
+			<f:render partial="Components/Address" section="Url" arguments="{address: country}" />
+		</td>
+		<td>
+			<f:if condition="{country.productLine}">
+				<ul class="contact-listing--country-product-lines list--default">
+					<f:for each="{country.productLine}" as="productLine">
+						<li>{productLine.title}</li>
+					</f:for>
+				</ul>
+			</f:if>
+		</td>
+		<td>
+			<f:if condition="{country.countryCategory.countryDescription}">
+				<div class="contact-listing--country-description"><f:format.html>{country.countryCategory.countryDescription}</f:format.html></div>
+			</f:if>
+			<f:render partial="Components/Address" section="Phone" arguments="{address: country}" />
+			<f:render partial="Components/Address" section="Mail" arguments="{address: country}" />
+		</td>
+	</tr>
 </f:section>
 </html>
