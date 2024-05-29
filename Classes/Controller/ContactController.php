@@ -10,14 +10,14 @@ use JeroenDesloovere\VCard\Property\Gender;
 use JeroenDesloovere\VCard\Property\Name;
 use JeroenDesloovere\VCard\Property\Parameter\Type;
 use JeroenDesloovere\VCard\Property\Telephone;
+use JeroenDesloovere\VCard\Property\Title;
 use JeroenDesloovere\VCard\VCard;
+use Ps\Contact\Domain\Model\Contact;
 use Ps\Contact\Domain\Repository\ContactRepository;
 use Ps\Contact\Domain\Repository\CountryRepository;
 use Ps14\Foundation\Domain\Model\Category;
 use Ps14\Foundation\Domain\Repository\CategoryRepository;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Extbase\Annotation\Inject;
 
 /***
  *
@@ -68,24 +68,24 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function listingAction() {
 		$this->view->assign('record', $this->configurationManager->getContentObject()->data);
-		$this->view->assign('contacts', $this->contactRepository->findAll([
+		$this->view->assign('contacts', $this->contactRepository->findAllByOption([
 			'not' => [
 				'continent' => 0,
-				'country' => 0,
+				'countryCategory' => 0,
 			]
 		], [
 			'continent.sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-			'country.sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+			'countryCategory.sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
 		]));
 
 		return $this->htmlResponse();
 	}
 
 	/**
-	 * @param \Ps\Contact\Domain\Model\Contact $contact
+	 * @param Contact $contact
 	 * @return \Psr\Http\Message\ResponseInterface
 	 */
-	public function showAction(\Ps\Contact\Domain\Model\Contact $contact) {
+	public function showAction(Contact $contact) {
 		$this->view->assign('contact', $contact);
 		return $this->htmlResponse();
 	}
@@ -138,20 +138,30 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	}
 
 	/**
-	 * @param \Ps\Contact\Domain\Model\Contact $contact
+	 * @param Contact $contact
+	 * @Extbase\IgnoreValidation("Contact")
+	 * @return boolean
 	 */
 	public function vcardAction(\Ps\Contact\Domain\Model\Contact $contact) {
 		$vcard = new VCard();
 
 		// Name + Anrede (mappen)
 		$salutation = [
-			'm' => LocalizationUtility::translate('LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.salutation.m', 'Xo'),
-			'f' => LocalizationUtility::translate('LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.salutation.f', 'Xo'),
+			'm' => LocalizationUtility::translate('LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_frontend.xlf:salutation.m'),
+			'f' => LocalizationUtility::translate('LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_frontend.xlf:salutation.f'),
 			'v' => '',
 			'' => ''
 		];
 
-		$vcard->add(new Name($contact->getLastName(), $contact->getFirstName(), '', $salutation[$contact->getGender()]));
+		if(empty($contact->getLastName()) === false || empty($contact->getFirstName()) === false) {
+			$vcard->add(new Name($contact->getLastName(), $contact->getFirstName(), '', $salutation[$contact->getGender()]));
+		} else {
+			$vcard->add(new Name('', '', '', $salutation[$contact->getGender()]));
+		}
+
+		if(empty($contact->getCompany()) === false) {
+			$vcard->add(new Title($contact->getCompany()));
+		}
 
 		// Geschlecht (bzw. mappen)
 		$gender = [
@@ -177,17 +187,28 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			$vcard->add(new Telephone($contact->getMobile(), Type::work()));
 		}
 
-		//$vcard->add(new Org('Kist + Escherich GmbH'));
-
 		// Dateiname
-		$filename = strtolower($contact->getLastName() . '-' . $contact->getFirstName());
+		if(empty($contact->getLastName()) === false || empty($contact->getFirstName()) === false) {
+			$filename = strtolower($contact->getLastName() . '-' . $contact->getFirstName());
+
+		} elseif(empty($contact->getCompany()) === false) {
+			$filename = $contact->getCompany();
+		}
+
 		$filename = str_replace(['ä', 'ö', 'ü', 'ß'], ['ae', 'oe', 'ue', 'ss'], $filename);
 		$filename = preg_replace('/[^0-9a-z\-]/m', '', $filename);
+		$filename = trim($filename, ' -');
 
 		$formatter = new Formatter(new VcfFormatter(), $filename);
 		$formatter->addVCard($vcard);
-		$formatter->download();
 
-		return true;
+		$response = $this->responseFactory->createResponse();
+		$response = $response->withBody($this->streamFactory->createStream((string) $formatter->getContent()));
+
+		foreach($formatter->getHeaders() as $name => $value) {
+			$response = $response->withHeader($name, (string) $value);
+		}
+
+		return $response;
 	}
 }

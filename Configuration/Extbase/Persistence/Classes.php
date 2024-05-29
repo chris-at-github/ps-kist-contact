@@ -14,7 +14,7 @@ return [
 			'continent' => [
 				'fieldName' => 'tx_contact_continent'
 			],
-			'country' => [
+			'countryCategory' => [
 				'fieldName' => 'tx_contact_country'
 			],
 		]

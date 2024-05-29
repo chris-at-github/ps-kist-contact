@@ -39,7 +39,7 @@ class Contact extends \Ps14\Foundation\Domain\Model\Address {
 	/**
 	 * @var \Ps\Contact\Domain\Model\Country
 	 */
-	protected $country = null;
+	protected $countryCategory = null;
 
 	/**
 	 * __construct
@@ -120,13 +120,6 @@ class Contact extends \Ps14\Foundation\Domain\Model\Address {
 	 * @return \Ps14\Foundation\Domain\Model\Category|null
 	 */
 	public function getCountryCategory(): ?\Ps14\Foundation\Domain\Model\Category {
-		return $this->country;
+		return $this->countryCategory;
 	}
-//
-//	/**
-//	 * @param \Ps\Xo\Domain\Model\Category|null $country
-//	 */
-//	public function setCountry(?\Ps14\Foundation\Domain\Model\Category $country): void {
-//		$this->country = $country;
-//	}
 }
