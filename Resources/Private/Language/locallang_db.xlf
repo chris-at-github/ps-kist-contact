@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="EXT:contact/Resources/Private/Language/locallang_db" date="2021-01-06T17:01:06Z" product-name="contact">
+	<file source-language="en" datatype="plaintext" original="messages" date="2024-05-29T10:00:00Z" product-name="contact">
 		<header/>
 		<body>
 			<trans-unit id="tx_contact_domain_model_contact" resname="tx_contact_domain_model_contact">
@@ -45,19 +45,6 @@
 			</trans-unit>
 			<trans-unit id="tt_address.tx_contact_country">
 				<source>Country</source>
-			</trans-unit>
-
-			<trans-unit id="tx_contact_frontend.name" resname="tx_contact_frontend.name">
-				<source>Contact Frontend</source>
-			</trans-unit>
-			<trans-unit id="tx_contact_frontend.description" resname="tx_contact_frontend.description">
-				<source></source>
-			</trans-unit>
-			<trans-unit id="tx_contact_search.name" resname="tx_contact_search.name">
-				<source>Contact Search</source>
-			</trans-unit>
-			<trans-unit id="tx_contact_search.description" resname="tx_contact_search.description">
-				<source></source>
 			</trans-unit>
 		</body>
 	</file>

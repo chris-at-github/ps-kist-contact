@@ -1,0 +1,33 @@
+[115 in tree.rootLineIds]
+	TCAdefaults.tt_address {
+		record_type = Ps\Contact\Domain\Model\Contact
+	}
+[END]
+
+mod.wizards.newContentElement.wizardItems {
+	plugins {
+		elements {
+			contact_frontend {
+				iconIdentifier = contact-frontend
+				title = LLL:EXT:contact/Resources/Private/Language/locallang_plugin.xlf:frontend.title
+				description = LLL:EXT:contact/Resources/Private/Language/locallang_plugin.xlf:frontend.description
+				tt_content_defValues {
+					CType = list
+					list_type = contact_frontend
+				}
+			}
+
+			contact_search {
+				iconIdentifier = contact-search
+				title = LLL:EXT:contact/Resources/Private/Language/locallang_plugin.xlf:search.title
+				description = LLL:EXT:contact/Resources/Private/Language/locallang_plugin.xlf:search.description
+				tt_content_defValues {
+					CType = list
+					list_type = contact_search
+				}
+			}
+		}
+
+		show := addToList(contact_frontend, contact_search)
+	}
+}

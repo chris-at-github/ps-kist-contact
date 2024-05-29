@@ -1,19 +1,24 @@
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
 
-call_user_func(function() {
+if(defined('TYPO3') === false) {
+	die('Access denied.');
+}
 
+(function () {
+
+	// Frontend | Listing
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 		'Contact',
 		'Frontend',
-		'Contact Frontend'
+		'LLL:EXT:contact/Resources/Private/Language/locallang_plugin.xlf:frontend.title',
+		'foundation-address-record'
 	);
 
+	// Search
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 		'Contact',
 		'Search',
-		'Contact Search'
+		'LLL:EXT:contact/Resources/Private/Language/locallang_plugin.xlf:frontend.search',
+		'foundation-address-record'
 	);
-
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_contact_domain_model_location');
-});
+})();

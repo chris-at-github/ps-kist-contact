@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2024-05-29T10:00:00Z" product-name="contact">
+		<header/>
+		<body>
+			<trans-unit id="frontend.name">
+				<source>Contact Frontend</source>
+			</trans-unit>
+			<trans-unit id="frontend.description">
+				<source>Display of contacts grouped by continents and countries</source>
+			</trans-unit>
+			<trans-unit id="search.name">
+				<source>Contact Search</source>
+			</trans-unit>
+			<trans-unit id="search.description">
+				<source>Search for points of contact by country and postal code</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

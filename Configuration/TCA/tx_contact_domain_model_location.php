@@ -1,6 +1,6 @@
 <?php
 
-$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contact');
+//$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contact');
 
 return [
 	'ctrl' => [
@@ -22,14 +22,18 @@ return [
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		],
+		'security' => [
+			'ignorePageTypeRestriction' => true,
+		],
 		'searchFields' => 'zip',
-		'iconfile' => 'EXT:contact/Resources/Public/Icons/tx_contact_domain_model_location.gif'
-	],
-	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, zip, contact, country',
+		'iconfile' => 'EXT:contact/Resources/Public/Icons/contact-location.svg',
 	],
 	'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, zip, contact, country, product_line, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+		'1' => [
+			'showitem' => '
+				sys_language_uid, l10n_parent, l10n_diffsource, hidden, zip, contact, country, product_line, 
+				--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'
+		],
 	],
 	'columns' => [
 		'sys_language_uid' => [
@@ -139,7 +143,7 @@ return [
 					['', 0],
 				],
 				'foreign_table' => 'tt_address',
-				'foreign_table_where' => ' AND tt_address.sys_language_uid IN (-1, 0) and tt_address.pid = ' . (int) $extensionConfiguration['uidContactFolder'] . ' ORDER BY tt_address.sorting ASC',
+//				'foreign_table_where' => ' AND tt_address.sys_language_uid IN (-1, 0) and tt_address.pid = ' . (int) $extensionConfiguration['uidContactFolder'] . ' ORDER BY tt_address.sorting ASC',
 				'default' => 0,
 				'minitems' => 0,
 				'maxitems' => 1,
@@ -158,7 +162,7 @@ return [
 				'size' => 1,
 				'maxitems' => 1,
 				'foreign_table' => 'sys_category',
-				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentCountryCategory'] . ' ORDER BY sys_category.sorting ASC',
+//				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentCountryCategory'] . ' ORDER BY sys_category.sorting ASC',
 			],
 		],
 		'product_line' => [
@@ -173,7 +177,7 @@ return [
 				'size' => 1,
 				'maxitems' => 1,
 				'foreign_table' => 'sys_category',
-				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentProductLineCategory'] . ' ORDER BY sys_category.sorting ASC',
+//				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentProductLineCategory'] . ' ORDER BY sys_category.sorting ASC',
 			],
 		],
 	],
