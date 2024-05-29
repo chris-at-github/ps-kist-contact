@@ -139,7 +139,6 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 	/**
 	 * @param Contact $contact
-	 * @Extbase\IgnoreValidation("Contact")
 	 * @return boolean
 	 */
 	public function vcardAction(\Ps\Contact\Domain\Model\Contact $contact) {
