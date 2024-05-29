@@ -11,7 +11,7 @@ if(defined('TYPO3') === false) {
 		'Contact',
 		'Frontend',
 		'LLL:EXT:contact/Resources/Private/Language/locallang_plugin.xlf:frontend.title',
-		'foundation-address-record'
+		'contact-frontend'
 	);
 
 	// Search
@@ -19,6 +19,6 @@ if(defined('TYPO3') === false) {
 		'Contact',
 		'Search',
 		'LLL:EXT:contact/Resources/Private/Language/locallang_plugin.xlf:frontend.search',
-		'foundation-address-record'
+		'contact-search'
 	);
 })();
