@@ -2,22 +2,19 @@ plugin.tx_contact {
 	view {
 		layoutRootPaths {
 			10 = EXT:contact/Resources/Private/Layouts/
-			20 = EXT:xna/Resources/Private/Extensions/Contact/Layouts/
-			30 = {$plugin.tx_contact.view.layoutRootPath}
+			20 = EXT:ps14_site/Resources/Private/Extensions/Contact/Layouts/
 		}
 
 		templateRootPaths {
 			10 = EXT:contact/Resources/Private/Templates/
-			20 = EXT:xna/Resources/Private/Extensions/Contact/Templates/
-			30 = {$plugin.tx_contact.view.templateRootPath}
+			20 = EXT:ps14_site/Resources/Private/Extensions/Contact/Templates/
 		}
 
 		partialRootPaths {
 			10 = EXT:contact/Resources/Private/Partials/
-			20 = EXT:xo/Resources/Private/Extensions/Xo/Partials/
-			30 = EXT:xna/Resources/Private/Extensions/Contact/Partials/
-			40 = {$plugin.tx_contact.view.partialRootPath}
-			50 = EXT:xo/Resources/Private/Extensions/FluidStyledContent/Partials/
+			20 = EXT:ps14_site/Resources/Private/Extensions/Contact/Partials/
+			30 = EXT:ps14_foundation/Resources/Private/Partials/
+			40 = EXT:ps14_site/Resources/Private/Partials/
 		}
 	}
 
@@ -73,16 +70,16 @@ vcard {
 	}
 }
 
-tt_content.list.dataProcessing.200 {
-	contact_search {
-		importCss {
-			10 = /assets/css/components/tab.css
-			20 = /assets/css/modules/contact.css
-		}
-
-		importJs {
-			10 = /assets/js/components/tab.js
-			20 = /assets/js/contact.js
-		}
-	}
-}
+#tt_content.list.dataProcessing.200 {
+#	contact_search {
+#		importCss {
+#			10 = /assets/css/components/tab.css
+#			20 = /assets/css/modules/contact.css
+#		}
+#
+#		importJs {
+#			10 = /assets/js/components/tab.js
+#			20 = /assets/js/contact.js
+#		}
+#	}
+#}
