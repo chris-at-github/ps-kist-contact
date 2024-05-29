@@ -4,13 +4,9 @@
 
 	<f:if condition="{contacts}">
 		<f:then>
-			<div class="row">
-				<f:for each="{contacts}" as="contact">
-					<div class="col-12 col-md-6">
-						<f:render section="Item" arguments="{_all}" />
-					</div>
-				</f:for>
-			</div>
+			<f:for each="{contacts}" as="contact">
+					<f:render section="Item" arguments="{_all}" />
+			</f:for>
 		</f:then>
 		<f:else>
 			<div class="contact-search--result-error"><f:translate key="error.noResult" /></div>
@@ -24,6 +20,10 @@
 		<div class="address--name">
 			<f:render partial="Components/Person" section="Fullname" arguments="{person: contact}" />
 		</div>
+
+		<f:if condition="{contact.company}">
+			<div class="address--item address--company">{contact.company}</div>
+		</f:if>
 
 		<f:render partial="Components/Address" section="Phone" arguments="{address: contact}" />
 		<f:render partial="Components/Address" section="Mail" arguments="{address: contact}" />

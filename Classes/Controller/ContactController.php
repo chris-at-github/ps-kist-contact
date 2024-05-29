@@ -94,7 +94,6 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	public function formAction() {
-//		$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('contact');
 		$productLines = [];
 
 		/** @var Category $productLineMain */
@@ -134,7 +133,7 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			$options['location']['zip'] = $this->request->getArgument('zip');
 		}
 
-		$this->view->assign('contacts', $this->contactRepository->findAll($options));
+		$this->view->assign('contacts', $this->contactRepository->findAllByOption($options));
 		return $this->htmlResponse();
 	}
 
