@@ -143,7 +143,7 @@ return [
 					['', 0],
 				],
 				'foreign_table' => 'tt_address',
-//				'foreign_table_where' => ' AND tt_address.sys_language_uid IN (-1, 0) and tt_address.pid = ' . (int) $extensionConfiguration['uidContactFolder'] . ' ORDER BY tt_address.sorting ASC',
+				'foreign_table_where' => ' AND tt_address.sys_language_uid IN (-1, 0) and tt_address.record_type = "Ps\\\Contact\\\Domain\\\Model\\\Contact" ORDER BY tt_address.sorting ASC',
 				'default' => 0,
 				'minitems' => 0,
 				'maxitems' => 1,
@@ -159,10 +159,12 @@ return [
 				'items' => [
 					['', 0],
 				],
+				'itemsProcFunc' => Ps14\Foundation\Service\TcaService::class . '->getCategoriesByIdentifier',
+				'itemsProcConfig' => [
+					'identifier' => 'contact-countries',
+				],
 				'size' => 1,
 				'maxitems' => 1,
-				'foreign_table' => 'sys_category',
-//				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentCountryCategory'] . ' ORDER BY sys_category.sorting ASC',
 			],
 		],
 		'product_line' => [
@@ -174,10 +176,12 @@ return [
 				'items' => [
 					['', 0],
 				],
+				'itemsProcFunc' => Ps14\Foundation\Service\TcaService::class . '->getCategoriesByIdentifier',
+				'itemsProcConfig' => [
+					'identifier' => 'contact-product-lines',
+				],
 				'size' => 1,
 				'maxitems' => 1,
-				'foreign_table' => 'sys_category',
-//				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) and sys_category.parent = ' . (int) $extensionConfiguration['parentProductLineCategory'] . ' ORDER BY sys_category.sorting ASC',
 			],
 		],
 	],
