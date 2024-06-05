@@ -3,13 +3,13 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2024-05-29T10:00:00Z" product-name="contact">
 		<header/>
 		<body>
-			<trans-unit id="frontend.name">
+			<trans-unit id="frontend.title">
 				<source>Contact Frontend</source>
 			</trans-unit>
 			<trans-unit id="frontend.description">
 				<source>Display of contacts grouped by continents and countries</source>
 			</trans-unit>
-			<trans-unit id="search.name">
+			<trans-unit id="search.title">
 				<source>Contact Search</source>
 			</trans-unit>
 			<trans-unit id="search.description">
