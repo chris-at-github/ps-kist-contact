@@ -74,8 +74,7 @@ tt_content.list.dataProcessing {
 	200 {
 		contact_frontend {
 			importCss {
-				10 = /assets/css/components/tab.css
-				20 = /assets/css/modules/contact.css
+				10 = /assets/css/modules/contact.css
 			}
 
 			importJs {
