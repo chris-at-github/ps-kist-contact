@@ -17,6 +17,7 @@ use Ps\Contact\Domain\Repository\ContactRepository;
 use Ps\Contact\Domain\Repository\CountryRepository;
 use Ps14\Foundation\Domain\Model\Category;
 use Ps14\Foundation\Domain\Repository\CategoryRepository;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /***
@@ -133,7 +134,7 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			$options['location']['zip'] = $this->request->getArgument('zip');
 		}
 
-		$this->view->assign('contacts', $this->contactRepository->findAllByOption($options));
+		$this->view->assign('contacts', $this->contactRepository->setQuerySettings(['respectSysLanguage' => false])->findAllByOption($options));
 		return $this->htmlResponse();
 	}
 

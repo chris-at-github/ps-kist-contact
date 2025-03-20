@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Ps\Contact\Domain\Repository;
 
 use \Ps14\Foundation\Domain\Repository\CategoryRepository;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\LanguageAspect;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -26,6 +28,29 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class CountryRepository extends CategoryRepository {
 
 	/**
+	 * @var LanguageAspect
+	 */
+	protected $languageAspect = null;
+
+	/**
+	 * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+	 */
+	protected function getFrontend() {
+		return $GLOBALS['TSFE'];
+	}
+
+	/**
+	 * @return LanguageAspect
+	 */
+	protected function getLanguageAspect() {
+		if($this->languageAspect === null) {
+			$this->languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+		}
+
+		return $this->languageAspect;
+	}
+
+	/**
 	 * @param array $options
 	 */
 	public function findAllByLocations(array $options) {
@@ -45,13 +70,27 @@ class CountryRepository extends CategoryRepository {
 			)
 			->where(
 				$queryBuilder->expr()->neq('country', 0),
-				$queryBuilder->expr()->neq('product_line', 0)
+				$queryBuilder->expr()->neq('product_line', 0),
+				$queryBuilder->expr()->in('sys_category.sys_language_uid', [0, -1])
 			)
 			->groupBy('country')
 			->orderBy('sys_category.sorting')
 			->execute();
 
 		while($row = $statement->fetch()) {
+
+			if(empty($row) === false && (int) $row['sys_language_uid'] !== $this->getLanguageAspect()->getContentId()) {
+				$row = $this->getFrontend()->sys_page->getRecordOverlay(
+					'sys_category',
+					$row,
+					$this->getLanguageAspect()
+				);
+
+				if($row === null) {
+					continue;
+				}
+			}
+
 			$countries[] = $row;
 		}
 
@@ -69,7 +108,7 @@ class CountryRepository extends CategoryRepository {
 		/** @var QueryBuilder $queryBuilder */
 		$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_contact_domain_model_location')->createQueryBuilder();
 		$statement  = $queryBuilder
-			->select('sys_category.uid', 'sys_category.title', 'sys_category.tx_contact_zip_regex AS zipRegex', 'tx_contact_domain_model_location.zip AS zip', 'tx_contact_domain_model_location.product_line AS productLine')
+			->select('sys_category.*', 'sys_category.tx_contact_zip_regex AS zipRegex', 'tx_contact_domain_model_location.zip AS zip', 'tx_contact_domain_model_location.product_line AS productLine')
 			->addSelectLiteral(
 				$queryBuilder->expr()->max('tx_contact_domain_model_location.zip', 'isRegex')
 			)
@@ -82,7 +121,8 @@ class CountryRepository extends CategoryRepository {
 			)
 			->where(
 				$queryBuilder->expr()->neq('country', 0),
-				$queryBuilder->expr()->eq('product_line', $options['productLine'])
+				$queryBuilder->expr()->eq('product_line', $options['productLine']),
+				$queryBuilder->expr()->in('sys_category.sys_language_uid', [0, -1])
 			)
 			->groupBy('sys_category.uid')
 			->orderBy('sys_category.title')
@@ -95,6 +135,18 @@ class CountryRepository extends CategoryRepository {
 			}
 
 			$row['sorting'] = $i++;
+
+			if(empty($row) === false && (int) $row['sys_language_uid'] !== $this->getLanguageAspect()->getContentId()) {
+				$row = $this->getFrontend()->sys_page->getRecordOverlay(
+					'sys_category',
+					$row,
+					$this->getLanguageAspect()
+				);
+
+				if($row === null) {
+					continue;
+				}
+			}
 
 			$countries[(int) $row['uid']] = $row;
 		}
