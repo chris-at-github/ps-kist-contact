@@ -22,6 +22,21 @@
 			<trans-unit id="contact" resname="contact">
 				<target>Kontakt</target>
 			</trans-unit>
+			<trans-unit id="zip">
+				<target>Postleitzahl</target>
+			</trans-unit>
+			<trans-unit id="country">
+				<target>Land</target>
+			</trans-unit>
+			<trans-unit id="select-productline">
+				<target>Produktlinie wählen</target>
+			</trans-unit>
+			<trans-unit id="select-country">
+				<target>Land wählen</target>
+			</trans-unit>
+			<trans-unit id="enter-zip">
+				<target>Postleitzahl eingeben</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

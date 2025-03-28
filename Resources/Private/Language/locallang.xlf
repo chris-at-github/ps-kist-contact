@@ -9,10 +9,6 @@
 			<trans-unit id="error.noResult" resname="error.noResult">
 				<source>No contacts found. Please enter a valid zip.</source>
 			</trans-unit>
-
-			<trans-unit id="country" resname="country">
-				<source>Country</source>
-			</trans-unit>
 			<trans-unit id="provider" resname="provider">
 				<source>Contact person</source>
 			</trans-unit>
@@ -21,6 +17,21 @@
 			</trans-unit>
 			<trans-unit id="contact" resname="contact">
 				<source>Contact</source>
+			</trans-unit>
+			<trans-unit id="country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="select-productline">
+				<source>Select product line</source>
+			</trans-unit>
+			<trans-unit id="select-country">
+				<source>Select country</source>
+			</trans-unit>
+			<trans-unit id="enter-zip">
+				<source>Enter zip</source>
 			</trans-unit>
 		</body>
 	</file>

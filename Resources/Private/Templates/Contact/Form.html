@@ -24,17 +24,17 @@
 				<div class="row">
 					<div class="col-12 form-item">
 						<label class="form-label" for="location-product-line"><f:translate key="LLL:EXT:contact/Resources/Private/Language/locallang.xlf:productLine" /></label>
-						<f:form.select name="productLine" class="form-field contact-search--product-lines" id="location-product-line" options="{productLines}" optionValueField="uid" optionLabelField="title" prependOptionLabel="" prependOptionValue="0" />
+						<f:form.select name="productLine" class="form-field contact-search--product-lines" id="location-product-line" options="{productLines}" optionValueField="uid" optionLabelField="title" prependOptionLabel="{f:translate(key: 'LLL:EXT:contact/Resources/Private/Language/locallang.xlf:')}" prependOptionValue="0" />
 					</div>
 
 					<div class="col-12 col-sm-6 form-item">
-						<label class="form-label" for="location-country"><f:translate key="LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.country" /></label>
-						<f:form.select name="country" class="form-field contact-search--countries" id="location-country" disabled="disabled" prependOptionLabel="" prependOptionValue="0" />
+						<label class="form-label" for="location-country"><f:translate key="LLL:EXT:contact/Resources/Private/Language/locallang.xlf:country" /></label>
+						<f:form.select name="country" class="form-field contact-search--countries" id="location-country" disabled="disabled" prependOptionLabel="{f:translate(key: 'LLL:EXT:contact/Resources/Private/Language/locallang.xlf:select-country')}" prependOptionValue="0" />
 					</div>
 
 					<div class="col-12 col-sm-6 form-item">
-						<label class="form-label" for="location-zip"><f:translate key="LLL:EXT:xo/Resources/Private/Language/locallang_frontend.xlf:tx_xo.zip" /></label>
-						<f:form.textfield name="zip" class="form-field contact-search--zip" id="location-zip" disabled="disabled" additionalAttributes="{'autocomplete': 'off'}" />
+						<label class="form-label" for="location-zip"><f:translate key="LLL:EXT:contact/Resources/Private/Language/locallang.xlf:zip" /></label>
+						<f:form.textfield name="zip" class="form-field contact-search--zip" id="location-zip" disabled="disabled" additionalAttributes="{'autocomplete': 'off'}" placeholder="{f:translate(key: 'LLL:EXT:contact/Resources/Private/Language/locallang.xlf:enter-zip')}" />
 					</div>
 				</div>
 			</div>
