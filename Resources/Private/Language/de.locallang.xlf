@@ -29,7 +29,7 @@
 				<target>Land</target>
 			</trans-unit>
 			<trans-unit id="select-productline">
-				<target>Produktlinie wählen</target>
+				<target>Produktsparte wählen</target>
 			</trans-unit>
 			<trans-unit id="select-country">
 				<target>Land wählen</target>
