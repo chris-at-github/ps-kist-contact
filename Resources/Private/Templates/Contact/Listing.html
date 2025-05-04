@@ -66,7 +66,11 @@
 				<div class="contact-listing--country-company address--item address--company">{country.company}</div>
 			</f:if>
 
-			<f:render partial="Components/Address" section="Url" arguments="{address: country}" />
+			<f:if condition="{country.www}">
+				<div class="address--item address--url">
+					<f:link.external class="link--url" uri="{country.www}" target="_blank" rel="noopener">{country.www -> fo:format.uri()}</f:link.external>
+				</div>
+			</f:if>
 		</td>
 		<td>
 			<f:if condition="{country.productLine}">
