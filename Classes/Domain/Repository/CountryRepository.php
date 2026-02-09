@@ -91,7 +91,10 @@ class CountryRepository extends CategoryRepository {
 				}
 			}
 
-			$countries[] = $row;
+            // Sortierungs-Key. Die eigentliche Sortierung findet in JS statt
+            $row['sorting'] = str_replace(['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', ' '], ['ae', 'oe', 'ue', 'ae', 'oe', 'ue', ''], strtolower($row['title']));
+
+            $countries[(int) $row['uid']] = $row;
 		}
 
 		return $countries;

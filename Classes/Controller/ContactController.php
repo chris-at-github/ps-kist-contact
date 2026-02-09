@@ -95,21 +95,21 @@ class ContactController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return \Psr\Http\Message\ResponseInterface
 	 */
 	public function formAction() {
-		$productLines = [];
+//		$productLines = [];
+//
+//		/** @var Category $productLineMain */
+//		$productLineMain = $this->categoryRepository->findByOption(['identifier' => 'contact-product-lines']);
+//
+//		/** @var Category $productLine */
+//		foreach($this->categoryRepository->findAllByOption(['parent' => (int) $productLineMain->getUid()]) as $productLine) {
+//			$productLines[(int) $productLine->getUid()] = [
+//				'uid' => (int) $productLine->getUid(),
+//				'title' => $productLine->getTitle(),
+//				'countries' => $this->countryRepository->findAllByProductLine(['productLine' => (int) $productLine->getUid()])
+//			];
+//		}
 
-		/** @var Category $productLineMain */
-		$productLineMain = $this->categoryRepository->findByOption(['identifier' => 'contact-product-lines']);
-
-		/** @var Category $productLine */
-		foreach($this->categoryRepository->findAllByOption(['parent' => (int) $productLineMain->getUid()]) as $productLine) {
-			$productLines[(int) $productLine->getUid()] = [
-				'uid' => (int) $productLine->getUid(),
-				'title' => $productLine->getTitle(),
-				'countries' => $this->countryRepository->findAllByProductLine(['productLine' => (int) $productLine->getUid()])
-			];
-		}
-
-		$this->view->assign('productLines', $productLines);
+        $this->view->assign('countries', $this->countryRepository->findAllByLocations([]));
 		$this->view->assign('record', $this->request->getAttribute('currentContentObject')->data);
 		return $this->htmlResponse();
 	}
