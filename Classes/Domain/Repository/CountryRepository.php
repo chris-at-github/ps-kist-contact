@@ -60,7 +60,7 @@ class CountryRepository extends CategoryRepository {
 		/** @var QueryBuilder $queryBuilder */
 		$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_contact_domain_model_location')->createQueryBuilder();
 		$statement  = $queryBuilder
-			->select('sys_category.uid', 'sys_category.title', 'sys_category.tx_contact_zip_regex AS zipRegex', 'tx_contact_domain_model_location.product_line AS productLine')
+			->select('sys_category.*', 'sys_category.tx_contact_zip_regex AS zipRegex', 'tx_contact_domain_model_location.product_line AS productLine')
 			->from('tx_contact_domain_model_location')
 			->join(
 				'tx_contact_domain_model_location',
@@ -70,7 +70,6 @@ class CountryRepository extends CategoryRepository {
 			)
 			->where(
 				$queryBuilder->expr()->neq('country', 0),
-				$queryBuilder->expr()->neq('product_line', 0),
 				$queryBuilder->expr()->in('sys_category.sys_language_uid', [0, -1])
 			)
 			->groupBy('country')
@@ -78,18 +77,17 @@ class CountryRepository extends CategoryRepository {
 			->execute();
 
 		while($row = $statement->fetch()) {
+            if(empty($row) === false && (int) $row['sys_language_uid'] !== $this->getLanguageAspect()->getContentId()) {
+                $row = $this->getFrontend()->sys_page->getRecordOverlay(
+                    'sys_category',
+                    $row,
+                    $this->getLanguageAspect()
+                );
 
-			if(empty($row) === false && (int) $row['sys_language_uid'] !== $this->getLanguageAspect()->getContentId()) {
-				$row = $this->getFrontend()->sys_page->getRecordOverlay(
-					'sys_category',
-					$row,
-					$this->getLanguageAspect()
-				);
-
-				if($row === null) {
-					continue;
-				}
-			}
+                if($row === null) {
+                    continue;
+                }
+            }
 
             // Sortierungs-Key. Die eigentliche Sortierung findet in JS statt
             $row['sorting'] = str_replace(['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', ' '], ['ae', 'oe', 'ue', 'ae', 'oe', 'ue', ''], strtolower($row['title']));
