@@ -29,7 +29,6 @@
 						<tr>
 							<th><f:translate key="country" /></th>
 							<th><f:translate key="provider" /></th>
-							<th><f:translate key="productLine" /></th>
 							<th><f:translate key="contact" /></th>
 						</tr>
 						</thead>
@@ -70,15 +69,6 @@
 				<div class="address--item address--url">
 					<f:link.external class="link--url" uri="{country.www}" target="_blank" rel="noopener">{country.www -> fo:format.uri()}</f:link.external>
 				</div>
-			</f:if>
-		</td>
-		<td>
-			<f:if condition="{country.productLine}">
-				<ul class="contact-listing--country-product-lines list--default">
-					<f:for each="{country.productLine}" as="productLine">
-						<li>{productLine.title}</li>
-					</f:for>
-				</ul>
 			</f:if>
 		</td>
 		<td>

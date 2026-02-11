@@ -6,7 +6,7 @@ return [
 	'ctrl' => [
 		'title' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_location',
 		'label' => 'zip',
-		'label_alt' => 'country, product_line',
+		'label_alt' => 'country',
 		'label_alt_force' => true,
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -31,7 +31,7 @@ return [
 	'types' => [
 		'1' => [
 			'showitem' => '
-				sys_language_uid, l10n_parent, l10n_diffsource, hidden, zip, contact, country, product_line, 
+				sys_language_uid, l10n_parent, l10n_diffsource, hidden, zip, contact, country, 
 				--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'
 		],
 	],
@@ -162,23 +162,6 @@ return [
 				'itemsProcFunc' => Ps14\Foundation\Service\TcaService::class . '->getCategoriesByIdentifier',
 				'itemsProcConfig' => [
 					'identifier' => 'contact-countries',
-				],
-				'size' => 1,
-				'maxitems' => 1,
-			],
-		],
-		'product_line' => [
-			'exclude' => true,
-			'label' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tx_contact_domain_model_location.product_line',
-			'config' => [
-				'type' => 'select',
-				'renderType' => 'selectSingle',
-				'items' => [
-					['', 0],
-				],
-				'itemsProcFunc' => Ps14\Foundation\Service\TcaService::class . '->getCategoriesByIdentifier',
-				'itemsProcConfig' => [
-					'identifier' => 'contact-product-lines',
 				],
 				'size' => 1,
 				'maxitems' => 1,

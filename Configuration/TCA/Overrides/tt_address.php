@@ -25,7 +25,7 @@
 	];
 
 	$GLOBALS['TCA']['tt_address']['palettes']['contactRelation'] = [
-		'showitem' => 'tx_contact_product_line, --linebreak--, tx_contact_continent, --linebreak--, tx_contact_country,'
+		'showitem' => 'tx_contact_continent, --linebreak--, tx_contact_country,'
 	];
 
 	// -------------------------------------------------------------------------------------------------------------------
@@ -43,28 +43,6 @@
 					'collapseAll' => 1,
 					'expandSingle' => 1,
 				],
-			],
-		],
-		'tx_contact_product_line' => [
-			'exclude' => true,
-			'label' => 'LLL:EXT:contact/Resources/Private/Language/locallang_db.xlf:tt_address.tx_contact_product_line',
-			'config' => [
-				'type' => 'select',
-				'renderType' => 'selectCheckBox',
-				'itemsProcFunc' => Ps14\Foundation\Service\TcaService::class . '->getCategoriesByIdentifier',
-				'itemsProcConfig' => [
-					'identifier' => 'contact-product-lines',
-					'filter' => true,
-				],
-				'size' => 5,
-				'MM' => 'sys_category_record_mm',
-				'MM_match_fields' => [
-					'fieldname' => 'tx_contact_product_line',
-					'tablenames' => 'tt_address',
-				],
-				'MM_opposite_field' => 'items',
-				'foreign_table' => 'sys_category',
-				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.sorting ASC',
 			],
 		],
 		'tx_contact_continent' => [

@@ -27,11 +27,6 @@ class Contact extends \Ps14\Foundation\Domain\Model\Address {
 	protected $locations = null;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ps14\Foundation\Domain\Model\Category>
-	 */
-	protected $productLine = null;
-
-	/**
 	 * @var \Ps14\Foundation\Domain\Model\Category
 	 */
 	protected $continent = null;
@@ -86,20 +81,6 @@ class Contact extends \Ps14\Foundation\Domain\Model\Address {
 	 */
 	public function setLocations(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $locations) {
 		$this->locations = $locations;
-	}
-
-	/**
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage|null
-	 */
-	public function getProductLine(): ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage {
-		return $this->productLine;
-	}
-
-	/**
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage|null $productLine
-	 */
-	public function setProductLine(?\TYPO3\CMS\Extbase\Persistence\ObjectStorage $productLine): void {
-		$this->productLine = $productLine;
 	}
 
 	/**

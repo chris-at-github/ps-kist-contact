@@ -40,13 +40,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     protected $country = null;
 
-	/**
-	 * country
-	 *
-	 * @var \Ps14\Foundation\Domain\Model\Category
-	 */
-	protected $productLine = null;
-
     /**
      * Returns the zip
      * 
@@ -109,18 +102,4 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
     {
         $this->country = $country;
     }
-
-	/**
-	 * @return \Ps14\Foundation\Domain\Model\Category|null
-	 */
-	public function getProductLine(): ?\Ps14\Foundation\Domain\Model\Category {
-		return $this->productLine;
-	}
-
-	/**
-	 * @param \Ps14\Foundation\Domain\Model\Category|null $productLine
-	 */
-	public function setProductLine(?\Ps14\Foundation\Domain\Model\Category $productLine): void {
-		$this->productLine = $productLine;
-	}
 }
