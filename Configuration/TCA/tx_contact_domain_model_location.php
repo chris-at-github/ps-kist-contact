@@ -64,7 +64,7 @@ return [
 					['', 0],
 				],
 				'foreign_table' => 'tx_contact_domain_model_location',
-				'foreign_table_where' => 'AND {#tx_contact_domain_model_location}.{#pid}=###CURRENT_PID### AND {#tx_contact_domain_model_location}.{#sys_language_uid} IN (-1,0)',
+				'foreign_table_where' => 'AND {#tx_contact_domain_model_location}.{#pid}=###CURRENT_PID### AND {#tx_contact_domain_model_location}.{#sys_language_uid} IN (-1,0) LIMIT 1',
 			],
 		],
 		'l10n_diffsource' => [
